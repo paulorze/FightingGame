@@ -1,0 +1,121 @@
+.modal {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.displayVida {
+    width: 100%;
+    padding: 2rem;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.player1, .player2 {
+    z-index: 1;
+    position: relative;
+    height: 30px;
+    width: 100%;
+    border-top: 2px solid #edf2f4;
+    border-bottom: 2px solid #edf2f4;
+}
+
+.player1 {
+    border-left: 2px solid #edf2f4;
+    border-radius: 2px 0 0 2px;
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+    transform-origin: top;
+    transform: skewX(17deg);
+}
+
+.player2 {
+    border-right: 2px solid #edf2f4;
+    border-radius: 0 2px 2px 0;
+    overflow: hidden;
+    transform-origin: top;
+    transform: skewX(-17deg);
+}
+
+.player1Total {
+    background-color: red;
+    height: 26px;
+    width: 100%;
+}
+
+.player2Total {
+    background-color: red;
+    height: 26px;
+}
+
+.player1Partial {
+    position: absolute;
+    background-color: #0077b6;
+    height: 26px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    transition: width 0.2s ease-in-out;
+}
+
+.player2Partial {
+    position: absolute;
+    background-color: #0077b6;
+    width: 100%;
+    height: 26px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: width 0.2s ease-in-out; 
+}
+
+.timer {
+    flex-shrink: 0;
+    z-index: 2;
+    border: 2px solid #edf2f4;
+    background-color: black;
+    color: #edf2f4;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.5rem;
+    padding: 1rem;
+    height: 75px;
+    width: 75px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    p {
+        padding-left: 5px;
+    }
+}
+
+.displayResultado {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: #edf2f4;
+    font-size: 4rem;
+    font-family: 'Press Start 2P', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        padding-left: 8px;
+    }
+}

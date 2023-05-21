@@ -1,0 +1,42 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "Background.tsx": {
+            "scaleInDock": 0.25,
+            "scaleInEditor": 1
+        },
+        "collision.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/agust/Desktop/JavaScript/Juego/assets/graphics/Backgrounds",
+    "last.externalTilesetPath": "C:/Users/agust/Desktop/JavaScript/Juego/assets/graphics/Backgrounds",
+    "last.imagePath": "C:/Users/agust/Desktop/JavaScript/Juego/assets/graphics/Backgrounds",
+    "map.height": 72,
+    "map.lastUsedExportFilter": "Archivos de mapa JavaScript (*.js)",
+    "map.tileHeight": 8,
+    "map.tileWidth": 8,
+    "map.width": 128,
+    "openFiles": [
+        "Background.tsx"
+    ],
+    "project": "Background1.tiled-project",
+    "recentFiles": [
+        "Background.tsx",
+        "collision.tsx"
+    ],
+    "tileset.lastUsedFilter": "Archivos de conjuntos de patrones Tiled (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 8,
+        "width": 8
+    }
+}
