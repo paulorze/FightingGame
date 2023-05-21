@@ -11,7 +11,7 @@ const background = new Sprite({position: {
     x: 0,
     y: 0
     },
-    imageSrc : '../../assets/graphics/Backgrounds/Background.png'
+    imageSrc : './assets/graphics/Backgrounds/Background.png'
 });
 
 // Creamos constructores para cada personaje
@@ -45,36 +45,36 @@ const EvilWizard = (name,position,keys)=>{
             x:-70 ,
             y: -225
         },
-        imageSrc: `../assets/graphics/characters/EvilWizard/Idle.png`,
+        imageSrc: `./assets/graphics/characters/EvilWizard/Idle.png`,
         framesMax : 8,
         sprites: {
             idle : {
-                imageSrc: `../assets/graphics/characters/EvilWizard/Idle.png`,
+                imageSrc: `./assets/graphics/characters/EvilWizard/Idle.png`,
                 framesMax : 8,
             },
             run: {
-                imageSrc: `../assets/graphics/characters/EvilWizard/Run.png`,
+                imageSrc: `./assets/graphics/characters/EvilWizard/Run.png`,
                 framesMax : 8,
             },
             jump: {
-                imageSrc: `../assets/graphics/characters/EvilWizard/Jump.png`,
+                imageSrc: `./assets/graphics/characters/EvilWizard/Jump.png`,
                 framesMax : 2,
             },
             fall: {
-                imageSrc: `../assets/graphics/characters/EvilWizard/Fall.png`,
+                imageSrc: `./assets/graphics/characters/EvilWizard/Fall.png`,
                 framesMax : 2,
             },
             attack: {
-                imageSrc: `../assets/graphics/characters/EvilWizard/Attack1.png`,
+                imageSrc: `./assets/graphics/characters/EvilWizard/Attack1.png`,
                 framesMax : 8,
                 frameAtk: 5
             },
             takeHit: {
-                imageSrc: `../assets/graphics/characters/EvilWizard/TakeHit.png`,
+                imageSrc: `./assets/graphics/characters/EvilWizard/TakeHit.png`,
                 framesMax : 3,
             },
             death: {
-                imageSrc: `../assets/graphics/characters/EvilWizard/Death.png`,
+                imageSrc: `./assets/graphics/characters/EvilWizard/Death.png`,
                 framesMax : 7,
             }
         },
@@ -113,36 +113,36 @@ const FantasyWarrior = (name,position,keys)=> {
             x:-75,
             y:-140
         },
-        imageSrc: `../assets/graphics/characters/FantasyWarrior/Idle.png`,
+        imageSrc: `./assets/graphics/characters/FantasyWarrior/Idle.png`,
         framesMax : 10,
         sprites: {
             idle : {
-                imageSrc: `../assets/graphics/characters/FantasyWarrior/Idle.png`,
+                imageSrc: `./assets/graphics/characters/FantasyWarrior/Idle.png`,
                 framesMax : 10,
             },
             run: {
-                imageSrc: `../assets/graphics/characters/FantasyWarrior/Run.png`,
+                imageSrc: `./assets/graphics/characters/FantasyWarrior/Run.png`,
                 framesMax : 8,
             },
             jump: {
-                imageSrc: `../assets/graphics/characters/FantasyWarrior/Jump.png`,
+                imageSrc: `./assets/graphics/characters/FantasyWarrior/Jump.png`,
                 framesMax : 3,
             },
             fall: {
-                imageSrc: `../assets/graphics/characters/FantasyWarrior/Fall.png`,
+                imageSrc: `./assets/graphics/characters/FantasyWarrior/Fall.png`,
                 framesMax : 3,
             },
             attack: {
-                imageSrc: `../assets/graphics/characters/FantasyWarrior/Attack1.png`,
+                imageSrc: `./assets/graphics/characters/FantasyWarrior/Attack1.png`,
                 framesMax : 7,
                 frameAtk: 5
             },
             takeHit: {
-                imageSrc: `../assets/graphics/characters/FantasyWarrior/TakeHit.png`,
+                imageSrc: `./assets/graphics/characters/FantasyWarrior/TakeHit.png`,
                 framesMax : 3,
             },
             death: {
-                imageSrc: `../assets/graphics/characters/FantasyWarrior/Death.png`,
+                imageSrc: `./assets/graphics/characters/FantasyWarrior/Death.png`,
                 framesMax : 7,
             }
         },
