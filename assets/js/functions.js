@@ -83,7 +83,6 @@ const EvilWizard = (name,position,keys)=>{
 };
 
 const FantasyWarrior = (name,position,keys)=> {
-
     return new Player({
         name : name,
         position: position,
@@ -180,36 +179,36 @@ const Huntress = (name,position,keys)=> {
             x:-110,
             y:-170
         },
-        imageSrc: `../../assets/graphics/characters/Huntress/Idle.png`,
+        imageSrc: `./assets/graphics/Characters/Huntress/Idle.png`,
         framesMax : 8,
         sprites: {
             idle : {
-                imageSrc: `../../assets/graphics/characters/Huntress/Idle.png`,
+                imageSrc: `./assets/graphics/Characters/Huntress/Idle.png`,
                 framesMax : 8,
             },
             run: {
-                imageSrc: `../../assets/graphics/characters/Huntress/Run.png`,
+                imageSrc: `./assets/graphics/Characters/Huntress/Run.png`,
                 framesMax : 8,
             },
             jump: {
-                imageSrc: `../../assets/graphics/characters/Huntress/Jump.png`,
+                imageSrc: `./assets/graphics/Characters/Huntress/Jump.png`,
                 framesMax : 2,
             },
             fall: {
-                imageSrc: `../../assets/graphics/characters/Huntress/Fall.png`,
+                imageSrc: `./assets/graphics/Characters/Huntress/Fall.png`,
                 framesMax : 2,
             },
             attack: {
-                imageSrc: `../../assets/graphics/characters/Huntress/Attack2.png`,
+                imageSrc: `./assets/graphics/Characters/Huntress/Attack2.png`,
                 framesMax : 5,
                 frameAtk: 4
             },
             takeHit: {
-                imageSrc: `../../assets/graphics/characters/Huntress/TakeHit.png`,
+                imageSrc: `./assets/graphics/Characters/Huntress/TakeHit.png`,
                 framesMax : 3,
             },
             death: {
-                imageSrc: `../../assets/graphics/characters/Huntress/Death.png`,
+                imageSrc: `./assets/graphics/Characters/Huntress/Death.png`,
                 framesMax : 8,
             }
         },
@@ -247,36 +246,36 @@ const MedievalKing = (name,position,keys)=> {
             x: 15,
             y: -30
         },
-        imageSrc : '../../assets/graphics/characters/MedievalKing/Idle.png',
+        imageSrc : './assets/graphics/Characters/MedievalKing/Idle.png',
         framesMax : 6,
         sprites: {
             idle: {
-                imageSrc : '../../assets/graphics/characters/MedievalKing/Idle.png',
+                imageSrc : './assets/graphics/Characters/MedievalKing/Idle.png',
                 framesMax : 6,
             },
             run: {
-                imageSrc : '../../assets/graphics/characters/MedievalKing/Run.png',
+                imageSrc : './assets/graphics/Characters/MedievalKing/Run.png',
                 framesMax : 8,
             },
             jump: {
-                imageSrc : '../../assets/graphics/characters/MedievalKing/Jump.png',
+                imageSrc : './assets/graphics/Characters/MedievalKing/Jump.png',
                 framesMax : 2,
             },
             fall: {
-                imageSrc : '../../assets/graphics/characters/MedievalKing/Fall.png',
+                imageSrc : './assets/graphics/Characters/MedievalKing/Fall.png',
                 framesMax : 2,
             },
             attack: {
-                imageSrc : '../../assets/graphics/characters/MedievalKing/Attack1.png',
+                imageSrc : './assets/graphics/Characters/MedievalKing/Attack1.png',
                 framesMax : 6,
                 frameAtk : 4
             },
             takeHit: {
-                imageSrc : '../../assets/graphics/characters/MedievalKing/TakeHit.png',
+                imageSrc : './assets/graphics/Characters/MedievalKing/TakeHit.png',
                 framesMax : 4,
             },
             death: {
-                imageSrc : '../../assets/graphics/characters/MedievalKing/Death.png',
+                imageSrc : './assets/graphics/Characters/MedievalKing/Death.png',
                 framesMax : 11,
             }
         },
@@ -314,36 +313,36 @@ const MedievalKing2 = (name,position,keys)=> {
             x:-55,
             y:-105
         },
-        imageSrc: `../../assets/graphics/characters/MedievalKing2/Idle.png`,
+        imageSrc: `./assets/graphics/Characters/MedievalKing2/Idle.png`,
         framesMax : 8,
         sprites: {
             idle : {
-                imageSrc: `../../assets/graphics/characters/MedievalKing2/Idle.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalKing2/Idle.png`,
                 framesMax : 8,
             },
             run: {
-                imageSrc: `../../assets/graphics/characters/MedievalKing2/Run.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalKing2/Run.png`,
                 framesMax : 8,
             },
             jump: {
-                imageSrc: `../../assets/graphics/characters/MedievalKing2/Jump.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalKing2/Jump.png`,
                 framesMax : 2,
             },
             fall: {
-                imageSrc: `../../assets/graphics/characters/MedievalKing2/Fall.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalKing2/Fall.png`,
                 framesMax : 2,
             },
             attack: {
-                imageSrc: `../../assets/graphics/characters/MedievalKing2/Attack1.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalKing2/Attack1.png`,
                 framesMax : 4,
                 frameAtk: 3
             },
             takeHit: {
-                imageSrc: `../../assets/graphics/characters/MedievalKing2/TakeHit.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalKing2/TakeHit.png`,
                 framesMax : 4,
             },
             death: {
-                imageSrc: `../../assets/graphics/characters/MedievalKing2/Death.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalKing2/Death.png`,
                 framesMax : 6,
             }
         },
@@ -381,36 +380,36 @@ const MedievalWarrior = (name,position,keys)=> {
             x:-70,
             y:-115
         },
-        imageSrc: `../../assets/graphics/characters/MedievalWarrior/Idle.png`,
+        imageSrc: `./assets/graphics/Characters/MedievalWarrior/Idle.png`,
         framesMax : 10,
         sprites: {
             idle : {
-                imageSrc: `../../assets/graphics/characters/MedievalWarrior/Idle.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalWarrior/Idle.png`,
                 framesMax : 10,
             },
             run: {
-                imageSrc: `../../assets/graphics/characters/MedievalWarrior/Run.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalWarrior/Run.png`,
                 framesMax : 6,
             },
             jump: {
-                imageSrc: `../../assets/graphics/characters/MedievalWarrior/Jump.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalWarrior/Jump.png`,
                 framesMax : 2,
             },
             fall: {
-                imageSrc: `../../assets/graphics/characters/MedievalWarrior/Fall.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalWarrior/Fall.png`,
                 framesMax : 2,
             },
             attack: {
-                imageSrc: `../../assets/graphics/characters/MedievalWarrior/Attack1.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalWarrior/Attack1.png`,
                 framesMax : 4,
                 frameAtk: 3
             },
             takeHit: {
-                imageSrc: `../../assets/graphics/characters/MedievalWarrior/GetHit.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalWarrior/GetHit.png`,
                 framesMax : 3,
             },
             death: {
-                imageSrc: `../../assets/graphics/characters/MedievalWarrior/Death.png`,
+                imageSrc: `./assets/graphics/Characters/MedievalWarrior/Death.png`,
                 framesMax : 9,
             }
         },
