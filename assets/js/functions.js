@@ -1,444 +1,79 @@
-// Creamos las constantes correspondientes a la posición inicial de los jugadores y las teclas que utilizarán.
-const positionPlayer1 = {x:200, y:20};
-const positionPlayer2 = {x:824, y:20};
-const keysPlayer1 = {left : 'a', right : 'd', jump : 'w', down : 's', melee : 'n'};
-const keysPlayer2 = {left : 'ArrowLeft', right : 'ArrowRight', jump : 'ArrowUp', down : 'ArrowDown', melee : '-'};
-
-// Creamos las constantes que corresponderan a los jugadores y al escenario
-let player1;
-let player2;
-const background = new Sprite({position: {
-    x: 0,
-    y: 0
-    },
-    imageSrc : './assets/graphics/Backgrounds/Background.png'
-});
-
-// Creamos constructores para cada personaje
-const EvilWizard = (name,position,keys)=>{
-    return new Player({
-        name : name,
-        position: position,
-        width : 70,
-        height: 150,
-        gravity : 0.5,
-        health: 80,
-        meleedmg : 15,
-        movementspd: 4.5,
-        jumpspd: -12,
-        keys: keys,
-        offsetAtk : -200,
-        attackBox: {
-            widthAB: 200,
-            heightAB: 50,
-            offsetAB: {
-                x: 75,
-                y: 25
-            }
-        },
-        scale: 2.25,
-        offset: {
-            x: 250,
-            y: 225
-        },
-        offsetMirror: {
-            x:-70 ,
-            y: -225
-        },
-        imageSrc: `./assets/graphics/Characters/EvilWizard/Idle.png`,
-        framesMax : 8,
-        sprites: {
-            idle : {
-                imageSrc: `./assets/graphics/Characters/EvilWizard/Idle.png`,
-                framesMax : 8,
-            },
-            run: {
-                imageSrc: `./assets/graphics/Characters/EvilWizard/Run.png`,
-                framesMax : 8,
-            },
-            jump: {
-                imageSrc: `./assets/graphics/Characters/EvilWizard/Jump.png`,
-                framesMax : 2,
-            },
-            fall: {
-                imageSrc: `./assets/graphics/Characters/EvilWizard/Fall.png`,
-                framesMax : 2,
-            },
-            attack: {
-                imageSrc: `./assets/graphics/Characters/EvilWizard/Attack1.png`,
-                framesMax : 8,
-                frameAtk: 5
-            },
-            takeHit: {
-                imageSrc: `./assets/graphics/Characters/EvilWizard/TakeHit.png`,
-                framesMax : 3,
-            },
-            death: {
-                imageSrc: `./assets/graphics/Characters/EvilWizard/Death.png`,
-                framesMax : 7,
-            }
-        },
-        collisionBlocks: collisionBlocks
-    });
-};
-
-const FantasyWarrior = (name,position,keys)=> {
-    return new Player({
-        name : name,
-        position: position,
-        width : 70,
-        height: 115,
-        gravity : 0.5,
-        health: 100,
-        meleedmg : 20,
-        movementspd: 5,
-        jumpspd: -15,
-        keys: keys,
-        offsetAtk : -110,
-        attackBox: {
-            widthAB: 85,
-            heightAB: 50,
-            offsetAB: {
-                x: 75,
-                y: 25
-            }
-        },
-        scale: 2.5,
-        offset: {
-            x: 165,
-            y: 140
-        },
-        offsetMirror: {
-            x:-75,
-            y:-140
-        },
-        imageSrc: `./assets/graphics/Characters/FantasyWarrior/Idle.png`,
-        framesMax : 10,
-        sprites: {
-            idle : {
-                imageSrc: `./assets/graphics/Characters/FantasyWarrior/Idle.png`,
-                framesMax : 10,
-            },
-            run: {
-                imageSrc: `./assets/graphics/Characters/FantasyWarrior/Run.png`,
-                framesMax : 8,
-            },
-            jump: {
-                imageSrc: `./assets/graphics/Characters/FantasyWarrior/Jump.png`,
-                framesMax : 3,
-            },
-            fall: {
-                imageSrc: `./assets/graphics/Characters/FantasyWarrior/Fall.png`,
-                framesMax : 3,
-            },
-            attack: {
-                imageSrc: `./assets/graphics/Characters/FantasyWarrior/Attack1.png`,
-                framesMax : 7,
-                frameAtk: 5
-            },
-            takeHit: {
-                imageSrc: `./assets/graphics/Characters/FantasyWarrior/TakeHit.png`,
-                framesMax : 3,
-            },
-            death: {
-                imageSrc: `./assets/graphics/Characters/FantasyWarrior/Death.png`,
-                framesMax : 7,
-            }
-        },
-        collisionBlocks: collisionBlocks
-    });
-};
-
-const Huntress = (name,position,keys)=> {
-    return new Player({
-        name : name,
-        position: position,
-        width : 70,
-        height: 120,
-        gravity : 0.4,
-        health: 90,
-        meleedmg : 20,
-        movementspd: 7,
-        jumpspd: -15,
-        keys: keys,
-        offsetAtk : -125,
-        attackBox: {
-            widthAB: 115,
-            heightAB: 50,
-            offsetAB: {
-                x: 75,
-                y: 0
-            }
-        },
-        scale: 3,
-        offset: {
-            x: 190,
-            y: 170
-        },
-        offsetMirror: {
-            x:-110,
-            y:-170
-        },
-        imageSrc: `./assets/graphics/Characters/Huntress/Idle.png`,
-        framesMax : 8,
-        sprites: {
-            idle : {
-                imageSrc: `./assets/graphics/Characters/Huntress/Idle.png`,
-                framesMax : 8,
-            },
-            run: {
-                imageSrc: `./assets/graphics/Characters/Huntress/Run.png`,
-                framesMax : 8,
-            },
-            jump: {
-                imageSrc: `./assets/graphics/Characters/Huntress/Jump.png`,
-                framesMax : 2,
-            },
-            fall: {
-                imageSrc: `./assets/graphics/Characters/Huntress/Fall.png`,
-                framesMax : 2,
-            },
-            attack: {
-                imageSrc: `./assets/graphics/Characters/Huntress/Attack2.png`,
-                framesMax : 5,
-                frameAtk: 4
-            },
-            takeHit: {
-                imageSrc: `./assets/graphics/Characters/Huntress/TakeHit.png`,
-                framesMax : 3,
-            },
-            death: {
-                imageSrc: `./assets/graphics/Characters/Huntress/Death.png`,
-                framesMax : 8,
-            }
-        },
-        collisionBlocks: collisionBlocks
-    });
-};
-
-const MedievalKing = (name,position,keys)=> {
-    return new Player({
-        name : name,
-        position: position,
-        width: 70,
-        height: 150,
-        gravity : 0.7,
-        health: 100,
-        meleedmg : 25,
-        movementspd: 4,
-        jumpspd: -15,
-        keys: keys,
-        offsetAtk : -105,
-        attackBox: {
-            widthAB: 100,
-            heightAB: 50,
-            offsetAB: {
-                x: 75,
-                y: 50
-            }
-        },
-        scale: 1.55,
-        offset: {
-            x: 70,
-            y: 30
-        },
-        offsetMirror: {
-            x: 15,
-            y: -30
-        },
-        imageSrc : './assets/graphics/Characters/MedievalKing/Idle.png',
-        framesMax : 6,
-        sprites: {
-            idle: {
-                imageSrc : './assets/graphics/Characters/MedievalKing/Idle.png',
-                framesMax : 6,
-            },
-            run: {
-                imageSrc : './assets/graphics/Characters/MedievalKing/Run.png',
-                framesMax : 8,
-            },
-            jump: {
-                imageSrc : './assets/graphics/Characters/MedievalKing/Jump.png',
-                framesMax : 2,
-            },
-            fall: {
-                imageSrc : './assets/graphics/Characters/MedievalKing/Fall.png',
-                framesMax : 2,
-            },
-            attack: {
-                imageSrc : './assets/graphics/Characters/MedievalKing/Attack1.png',
-                framesMax : 6,
-                frameAtk : 4
-            },
-            takeHit: {
-                imageSrc : './assets/graphics/Characters/MedievalKing/TakeHit.png',
-                framesMax : 4,
-            },
-            death: {
-                imageSrc : './assets/graphics/Characters/MedievalKing/Death.png',
-                framesMax : 11,
-            }
-        },
-        collisionBlocks: collisionBlocks
-    });
-};
-
-const MedievalKing2 = (name,position,keys)=> {
-    return new Player({
-        name : name,
-        position: position,
-        width : 70,
-        height: 125,
-        gravity : 0.5,
-        health: 100,
-        meleedmg : 20,
-        movementspd: 6,
-        jumpspd: -15,
-        keys: keys,
-        offsetAtk : -110,
-        attackBox: {
-            widthAB: 100,
-            heightAB: 50,
-            offsetAB: {
-                x: 75,
-                y: 25
-            }
-        },
-        scale: 2.2,
-        offset: {
-            x: 150,
-            y: 105
-        },
-        offsetMirror: {
-            x:-55,
-            y:-105
-        },
-        imageSrc: `./assets/graphics/Characters/MedievalKing2/Idle.png`,
-        framesMax : 8,
-        sprites: {
-            idle : {
-                imageSrc: `./assets/graphics/Characters/MedievalKing2/Idle.png`,
-                framesMax : 8,
-            },
-            run: {
-                imageSrc: `./assets/graphics/Characters/MedievalKing2/Run.png`,
-                framesMax : 8,
-            },
-            jump: {
-                imageSrc: `./assets/graphics/Characters/MedievalKing2/Jump.png`,
-                framesMax : 2,
-            },
-            fall: {
-                imageSrc: `./assets/graphics/Characters/MedievalKing2/Fall.png`,
-                framesMax : 2,
-            },
-            attack: {
-                imageSrc: `./assets/graphics/Characters/MedievalKing2/Attack1.png`,
-                framesMax : 4,
-                frameAtk: 3
-            },
-            takeHit: {
-                imageSrc: `./assets/graphics/Characters/MedievalKing2/TakeHit.png`,
-                framesMax : 4,
-            },
-            death: {
-                imageSrc: `./assets/graphics/Characters/MedievalKing2/Death.png`,
-                framesMax : 6,
-            }
-        },
-        collisionBlocks: collisionBlocks
-    });
-};
-
-const MedievalWarrior = (name,position,keys)=> {
-    return new Player({
-        name : name,
-        position: position,
-        width : 70,
-        height: 100,
-        gravity : 0.6,
-        health: 120,
-        meleedmg : 20,
-        movementspd: 5,
-        jumpspd: -12,
-        keys: keys,
-        offsetAtk : -110,
-        attackBox: {
-            widthAB: 100,
-            heightAB: 50,
-            offsetAB: {
-                x: 75,
-                y: 0
-            }
-        },
-        scale: 2.5,
-        offset: {
-            x: 135,
-            y: 115
-        },
-        offsetMirror: {
-            x:-70,
-            y:-115
-        },
-        imageSrc: `./assets/graphics/Characters/MedievalWarrior/Idle.png`,
-        framesMax : 10,
-        sprites: {
-            idle : {
-                imageSrc: `./assets/graphics/Characters/MedievalWarrior/Idle.png`,
-                framesMax : 10,
-            },
-            run: {
-                imageSrc: `./assets/graphics/Characters/MedievalWarrior/Run.png`,
-                framesMax : 6,
-            },
-            jump: {
-                imageSrc: `./assets/graphics/Characters/MedievalWarrior/Jump.png`,
-                framesMax : 2,
-            },
-            fall: {
-                imageSrc: `./assets/graphics/Characters/MedievalWarrior/Fall.png`,
-                framesMax : 2,
-            },
-            attack: {
-                imageSrc: `./assets/graphics/Characters/MedievalWarrior/Attack1.png`,
-                framesMax : 4,
-                frameAtk: 3
-            },
-            takeHit: {
-                imageSrc: `./assets/graphics/Characters/MedievalWarrior/GetHit.png`,
-                framesMax : 3,
-            },
-            death: {
-                imageSrc: `./assets/graphics/Characters/MedievalWarrior/Death.png`,
-                framesMax : 9,
-            }
-        },
-        collisionBlocks: collisionBlocks
-    });
-};
-
-// Creamos una función que permita crear a los jugadores con su personaje seleccionado, nombre correspondiente (para luego relacionarlo a la barra de vida), posición de inicio y teclas a utilizar.
-const characterSelect = (num,name,position,keys)=> {
-    switch (num) {
-        case 1:
-            return EvilWizard(name,position,keys);
-            break;
-        case 2:
-            return FantasyWarrior(name,position,keys);
-            break;
-        case 3:
-            return Huntress(name,position,keys);
-            break;
-        case 4:
-            return MedievalKing(name,position,keys);
-            break;
-        case 5:
-            return MedievalKing2(name,position,keys);
-            break;
-        case 6:
-            return MedievalKing2(name,position,keys);
-            break;
+// Con esta función verificamos que estén haciendo colisión la attackBox de jugador1 y el cuerpo de jugador2.
+const attackCollision = (player1,player2)=> {
+    if (player1.attackBox.position.x + player1.attackBox.width >= player2.position.x && 
+        player1.attackBox.position.x <= player2.position.x + player2.width && 
+        player1.attackBox.position.y + player1.attackBox.height >= player2.position.y && 
+        player1.attackBox.position.y <= player2.position.y + player2.height) {
+        return true
     };
+};
+
+// Con esta función verificamos si el ataque de uno de los jugadores está afectando al otro
+const verifyAttack = (player1,player2)=> {
+    if (attackCollision(player1,player2) && player1.isAttacking && player1.framesCurrent == player1.sprites.attack.frameAtk) {
+        player2.healthPartial -= player1.meleedmg;
+        document.querySelector(`.${player2.name}Partial`).style.width = 100 - (100 - Math.round(player2.healthPartial * 100 / player2.healthTotal))+`%`;
+        player2.switchSprite(`takeHit`);
+        player1.isAttacking = false;
+    };
+    if (player1.healthPartial == 0) {
+        player1.death();
+        determineWinner(timerId);
+    } else if (player2.healthPartial == 0) {
+        player2.death();
+        determineWinner(timerId);
+    };
+    if (player1.isAttacking && player1.framesCurrent == player1.sprites.attack.frameAtk) {player1.isAttacking = false};
+};
+
+// Con esta función verificamos que jugador1 está a la izquierda o derecha de jugador2
+const sideChange = (player1,player2)=> {
+    if (player1.rightSide == false && player1.position.x > player2.position.x + player2.width) {
+        player1.rightSide = true;
+        player1.attackBox.offset.x = player1.offsetAtk;
+    } else if (player1.rightSide == true && player1.position.x < player2.position.x) {
+        player1.rightSide = false;
+        player1.attackBox.offset.x = player1.offsetAtkOriginal.x;
+    };
+};
+
+// Con esta función vamos disminuyendo los segundos y mostrándolo en pantalla. Al finalizar, se dispara la verificación del resultado.
+const timerDecrease = ()=> {
+    if (matchTime > 0) {
+        timerId = setTimeout(timerDecrease, 1000);
+        matchTime --;
+        timer.innerHTML = `<p>${matchTime}</p>`;
+    };
+    if (matchTime === 0) {
+        determineWinner(timerId);
+    };
+};
+
+// Con esta función verificamos el resultado al finalizar el tiempo
+const determineWinner = (timerId)=> {
+    clearTimeout(timerId);
+    if (player1.healthPartial == player2.healthPartial) {
+        document.querySelector(`.displayResultado`).innerHTML = "Draw";
+    }else if (player1.healthPartial > player2.healthPartial) {
+        document.querySelector(`.displayResultado`).innerHTML = "Player 1 Wins";
+    } else {
+        document.querySelector(`.displayResultado`).innerHTML = "Player 2 Wins";
+    };
+};
+
+// Verificamos colisión entre dos objetos
+const collision = ({object1, object2})=> {
+    return(object1.position.y + object1.height >= object2.position.y 
+        && object1.position.y <= object2.position.y + object2.height 
+        && object1.position.x <= object2.position.x + object2.width 
+        && object1.position.x + object1.width >= object2.position.x);
+};
+
+const platformCollision = ({object1, object2})=> {
+    return(object1.position.y + object1.height >= object2.position.y 
+        && object1.position.y + object1.height <= object2.position.y + object2.height 
+        && object1.position.x <= object2.position.x + object2.width 
+        && object1.position.x + object1.width >= object2.position.x);
 };
 
 // Creamos la función que anima la interfaz de juego
@@ -452,22 +87,16 @@ const animate = ()=> {
     c.fillRect(0, 0, canvas.width,canvas.height);
     player1.update();
     player2.update();
-    collisionBlocks.forEach(collisionBlock => {
-        collisionBlock.update();
-    });
+    // // Esto es para verificar la ubicación de los bloques de posición
+    // c.fillStyle = `rgba(255,0,0,0.5)`;
+    // floorCollisionBlocks.forEach(collisionBlock => {
+    //     collisionBlock.update();
+    // });
+    // platformCollisionBlocks.forEach(collisionBlock => {
+    //     collisionBlock.update();
+    // });
     verifyAttack(player1,player2);
     verifyAttack(player2,player1);
     sideChange(player1,player2);
     sideChange(player2,player1);
 };
-
-// Creamos la función que nos dispara cuando se apreta el botón submit y que comienza el juego con 2 jugadores
-const initializeGame = (jugador1,jugador2,escenario)=> {
-    player1 = characterSelect(jugador1,`player1`,positionPlayer1,keysPlayer1);
-    player2 = characterSelect(jugador2,`player2`,positionPlayer2,keysPlayer2);
-
-    timerDecrease(player1,player2);
-    player1.movementInput();
-    player2.movementInput();
-    animate();
-}

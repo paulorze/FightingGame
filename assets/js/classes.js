@@ -1,8 +1,3 @@
-// // Verificamos colisión entre dos objetos
-// const collision = ({object1, object2})=> {
-//     return(object1.position.y + object1.height > object2.position.y && object1.position.y < object2.position.y + object2.height && object1.position.x > object2.position.x + object2.width && object1.position.x + object1.width < object2.position.x)
-// };
-
 class Sprite {
     constructor({
         position,
@@ -23,6 +18,7 @@ class Sprite {
         this.framesHold = 5;
         this.offset = offset;
     };
+    // Esta función dibuja los sprites de manera dinámica dependiendo de la cantidad de frames que tenga la imagen original.
     draw() {
         c.drawImage(
             this.image,
@@ -36,6 +32,7 @@ class Sprite {
             this.image.height * this.scale
         )
     };
+    // Esta función va haciendo que cambie el sprite de manera cíclica y dinámica.
     animateFrames() {
         this.framesElapsed++
         if (this.framesElapsed % this.framesHold === 0) {
@@ -53,7 +50,7 @@ class Sprite {
 };
 
 class Player extends Sprite {
-    constructor ({name,position,width,height,gravity,health,meleedmg,movementspd,jumpspd,keys:{left,right,jump,down,melee},offsetMirror = {x: 0, y: 0},offsetAtk,attackBox:{offsetAB,widthAB,heightAB},imageSrc,scale = 1, framesMax = 1,offset = { x: 0, y: 0 },sprites,collisionBlocks}) {
+    constructor ({name,position,width,height,gravity,health,meleedmg,movementspd,jumpspd,keys:{left,right,jump,down,melee},offsetMirror = {x: 0, y: 0},offsetAtk,attackBox:{offsetAB,widthAB,heightAB},imageSrc,scale = 1, framesMax = 1,offset = { x: 0, y: 0 },sprites,collisionBlocks,platformCollisionBlocks}) {
         super({
             position,
             imageSrc,
@@ -113,6 +110,7 @@ class Player extends Sprite {
             sprites[sprite].image.src = sprites[sprite].imageSrc;
         }
         this.collisionBlocks = collisionBlocks;
+        this.platformCollisionBlocks = platformCollisionBlocks;
     };
 
     // Con la siguiente función definimos que el jugador esté atacando.
@@ -126,6 +124,90 @@ class Player extends Sprite {
         if (this.framesCurrent == this.framesMax -1) {
             this.dead = true;
         };
+    };
+
+    // Con esta función cambiamos el sprite que se visualiza
+    switchSprite (sprite) {
+        // Con estos return evitamos que el sprite cambie antes de que termine la animación de ataque, recibir golpe o morir.
+        if (this.image === this.sprites.attack.image && this.framesCurrent < this.sprites.attack.framesMax -1) return;
+        if (this.image === this.sprites.takeHit.image && this.framesCurrent < this.sprites.takeHit.framesMax -1) return;
+        if (this.image === this.sprites.death.image) return;
+        switch (sprite) {
+            case `idle`:
+                if (this.image != this.sprites.idle.image) {
+                    this.image = this.sprites.idle.image;
+                    this.framesMax = this.sprites.idle.framesMax;
+                    this.framesCurrent = 0;
+                };
+                break;
+            case `run`:
+                if (this.image != this.sprites.run.image) {
+                    this.image = this.sprites.run.image;
+                    this.framesMax = this.sprites.run.framesMax;
+                    this.framesCurrent = 0;
+                };
+                break;
+            case `jump`:
+                if (this.image != this.sprites.jump.image) {
+                    this.image = this.sprites.jump.image;
+                    this.framesMax = this.sprites.jump.framesMax;
+                    this.framesCurrent = 0;
+                };
+                break;
+            case `fall`:
+                if (this.image != this.sprites.fall.image) {
+                    this.image = this.sprites.fall.image;
+                    this.framesMax = this.sprites.fall.framesMax;
+                    this.framesCurrent = 0;
+                };  
+                break;
+            case `attack`:
+                if (this.image != this.sprites.attack.image) {
+                    this.image = this.sprites.attack.image;
+                    this.framesMax = this.sprites.attack.framesMax;
+                    this.framesCurrent = 0;
+                };
+                break;
+            case `takeHit`:
+                if (this.image != this.sprites.takeHit.image) {
+                    this.image = this.sprites.takeHit.image;
+                    this.framesMax = this.sprites.takeHit.framesMax;
+                    this.framesCurrent = 0;
+                };
+                break;
+            case `death`:
+                if (this.image != this.sprites.death.image) {
+                    this.image = this.sprites.death.image;
+                    this.framesMax = this.sprites.death.framesMax;
+                    this.framesCurrent = 0;
+                };
+                break;
+        };
+    };
+
+    // Con esta función damos vuelta la imagen del personaje para que siempre esté viendo hacia el lado del oponente.
+
+    drawMirrored(){
+        // Declaramos las variables para que se pueda calcular de manera dinámica
+        let spriteW = (this.image.width / this.framesMax);
+        let spriteH = this.image.height;
+        let spriteX = spriteW * this.framesCurrent;
+        let spriteY = (this.image.height * this.scale);
+        //Hacemos las transformaciones necesarias, dibujamos la imagen y devolvemos el canvas a la normalidad.
+        c.translate(this.position.x + spriteW,this.position.y)
+        c.scale(-1,1)
+        c.drawImage(
+            this.image,
+            spriteX,
+            0,
+            spriteW,
+            spriteH,
+            this.offsetMirror.x,
+            this.offsetMirror.y,
+            spriteW*this.scale,
+            spriteY
+        );
+        c.setTransform(1,0,0,1,0,0);
     };
 
     // Con esta función escuchamos que las teclas declaradas al crear el jugador son escuchadas y modifiquen variables del jugador para que se pueda mover.
@@ -190,38 +272,56 @@ class Player extends Sprite {
 
     // Con esta función le aplicamos gravedad al personaje.
     applyGravity() {
-        this.position.y += this.velocity.y;
         this.velocity.y += this.gravity;
+        this.position.y += this.velocity.y;
     };
-
-    checkVerticalCollisions() {
+    
+    // Con las siguientes funciones verificamos colisión con los bloques del suelo y de las plataformas
+    checkFloorVerticalCollisions() {
         for (let i = 0; i < this.collisionBlocks.length; i++) {
             const collisionBlock = this.collisionBlocks[i];
-            if (this.position.y + this.height >= collisionBlock.position.y && this.position.y <= collisionBlock.position.y + collisionBlock.height) {
+            if (collision({object1 : this,object2: collisionBlock})) {
                 if(this.velocity.y > 0) {
                     this.velocity.y = 0;
-                    this.position.y = collisionBlock.position.y - this.height;
+                    this.position.y = collisionBlock.position.y - this.height - 0.01;
+                    break;
                 };
                 if(this.velocity.y < 0) {
                     this.velocity.y = 0;
-                    this.position.y = collisionBlock.position.y + this.height;
-                } 
+                    this.position.y = collisionBlock.position.y + collisionBlock.height + 0.01;
+                    break;
+                }; 
             };
         };
     };
 
-    checkHorizontalCollisions() {
+    checkFloorHorizontalCollisions() {
         for (let i = 0; i < this.collisionBlocks.length; i++) {
             const collisionBlock = this.collisionBlocks[i];
-            if (this.position.y + this.height >= collisionBlock.position.y && this.position.y <= collisionBlock.position.y + collisionBlock.height) {
+            if (collision({object1 : this,object2: collisionBlock})) {
                 if(this.velocity.x > 0) {
                     this.velocity.x = 0;
-                    this.position.x = collisionBlock.position.x - this.width;
+                    this.position.x = collisionBlock.position.x - this.width - 0.01;
+                    break;
                 };
                 if(this.velocity.x < 0) {
                     this.velocity.x = 0;
-                    this.position.x = collisionBlock.position.x + this.width;
-                } 
+                    this.position.x = collisionBlock.position.x + collisionBlock.width + 0.01;
+                    break;
+                };
+            };
+        };
+    };
+
+    checkPlatformVerticalCollisions() {
+        for (let i = 0; i < this.platformCollisionBlocks.length; i++) {
+            const platformCollisionBlock = this.platformCollisionBlocks[i];
+            if (platformCollision({object1 : this,object2: platformCollisionBlock})) {
+                if(this.velocity.y > 0) {
+                    this.velocity.y = 0;
+                    this.position.y = platformCollisionBlock.position.y - this.height - 0.01;
+                    break;
+                };
             };
         };
     };
@@ -234,155 +334,14 @@ class Player extends Sprite {
         if (!this.dead) this.animateFrames()
         this.movement();
         this.position.x += this.velocity.x;
-        // this.checkHorizontalCollisions();
+        this.checkFloorHorizontalCollisions();
         this.applyGravity();
-        this.checkVerticalCollisions();
+        this.checkFloorVerticalCollisions();
+        this.checkPlatformVerticalCollisions();
         this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
         this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
         // Esta línea es para ver nuestro attackBox
         // c.fillRect(this.attackBox.position.x,this.attackBox.position.y,this.attackBox.width,this.attackBox.height);
-    };
-
-    // Con esta función cambiamos el sprite
-    switchSprite (sprite) {
-        if (this.image === this.sprites.attack.image && this.framesCurrent < this.sprites.attack.framesMax -1) return;
-        if (this.image === this.sprites.takeHit.image && this.framesCurrent < this.sprites.takeHit.framesMax -1) return;
-        if (this.image === this.sprites.death.image) return;
-        switch (sprite) {
-            case `idle`:
-                if (this.image != this.sprites.idle.image) {
-                    this.image = this.sprites.idle.image;
-                    this.framesMax = this.sprites.idle.framesMax;
-                    this.framesCurrent = 0;
-                };
-                break;
-            case `run`:
-                if (this.image != this.sprites.run.image) {
-                    this.image = this.sprites.run.image;
-                    this.framesMax = this.sprites.run.framesMax;
-                    this.framesCurrent = 0;
-                };
-                break;
-            case `jump`:
-                if (this.image != this.sprites.jump.image) {
-                    this.image = this.sprites.jump.image;
-                    this.framesMax = this.sprites.jump.framesMax;
-                    this.framesCurrent = 0;
-                };
-                break;
-            case `fall`:
-                if (this.image != this.sprites.fall.image) {
-                    this.image = this.sprites.fall.image;
-                    this.framesMax = this.sprites.fall.framesMax;
-                    this.framesCurrent = 0;
-                };  
-                break;
-            case `attack`:
-                if (this.image != this.sprites.attack.image) {
-                    this.image = this.sprites.attack.image;
-                    this.framesMax = this.sprites.attack.framesMax;
-                    this.framesCurrent = 0;
-                };
-                break;
-            case `takeHit`:
-                if (this.image != this.sprites.takeHit.image) {
-                    this.image = this.sprites.takeHit.image;
-                    this.framesMax = this.sprites.takeHit.framesMax;
-                    this.framesCurrent = 0;
-                };
-                break;
-            case `death`:
-                if (this.image != this.sprites.death.image) {
-                    this.image = this.sprites.death.image;
-                    this.framesMax = this.sprites.death.framesMax;
-                    this.framesCurrent = 0;
-                };
-                break;
-        };
-    };
-
-    drawMirrored(){
-        let spriteW = (this.image.width / this.framesMax);
-        let spriteH = this.image.height;
-        let spriteX = spriteW * this.framesCurrent;
-        let spriteY = (this.image.height * this.scale);
-        c.translate(this.position.x + spriteW,this.position.y)
-        c.scale(-1,1)
-        c.drawImage(
-            this.image,
-            spriteX,
-            0,
-            spriteW,
-            spriteH,
-            this.offsetMirror.x,
-            this.offsetMirror.y,
-            spriteW*this.scale,
-            spriteY
-        );
-        c.setTransform(1,0,0,1,0,0);
-    };
-};
-
-// Con esta función verificamos que estén haciendo colisión la attackBox de jugador1 y el cuerpo de jugador2.
-const attackCollision = (player1,player2)=> {
-    if (player1.attackBox.position.x + player1.attackBox.width >= player2.position.x && 
-        player1.attackBox.position.x <= player2.position.x + player2.width && 
-        player1.attackBox.position.y + player1.attackBox.height >= player2.position.y && 
-        player1.attackBox.position.y <= player2.position.y + player2.height) {
-        return true
-    };
-};
-
-// Con esta función verificamos si el ataque de uno de los jugadores está afectando al otro
-const verifyAttack = (player1,player2)=> {
-    if (attackCollision(player1,player2) && player1.isAttacking && player1.framesCurrent == player1.sprites.attack.frameAtk) {
-        player2.healthPartial -= player1.meleedmg;
-        document.querySelector(`.${player2.name}Partial`).style.width = 100 - (100 - Math.round(player2.healthPartial * 100 / player2.healthTotal))+`%`;
-        player2.switchSprite(`takeHit`);
-        player1.isAttacking = false;
-    };
-    if (player1.healthPartial == 0) {
-        player1.death();
-        determineWinner(timerId);
-    } else if (player2.healthPartial == 0) {
-        player2.death();
-        determineWinner(timerId);
-    };
-    if (player1.isAttacking && player1.framesCurrent == player1.sprites.attack.frameAtk) {player1.isAttacking = false};
-};
-
-// Con esta función verificamos que jugador1 está a la izquierda o derecha de jugador2
-const sideChange = (player1,player2)=> {
-    if (player1.rightSide == false && player1.position.x > player2.position.x + player2.width) {
-        player1.rightSide = true;
-        player1.attackBox.offset.x = player1.offsetAtk;
-    } else if (player1.rightSide == true && player1.position.x < player2.position.x) {
-        player1.rightSide = false;
-        player1.attackBox.offset.x = player1.offsetAtkOriginal.x;
-    };
-};
-
-// Con esta función vamos disminuyendo los segundos y mostrándolo en pantalla. Al finalizar, se dispara la verificación del resultado.
-const timerDecrease = ()=> {
-    if (matchTime > 0) {
-        timerId = setTimeout(timerDecrease, 1000);
-        matchTime --;
-        timer.innerHTML = `<p>${matchTime}</p>`;
-    };
-    if (matchTime === 0) {
-        determineWinner(timerId);
-    };
-};
-
-// Con esta función verificamos el resultado al finalizar el tiempo
-const determineWinner = (timerId)=> {
-    clearTimeout(timerId);
-    if (player1.healthPartial == player2.healthPartial) {
-        document.querySelector(`.displayResultado`).innerHTML = "Draw";
-    }else if (player1.healthPartial > player2.healthPartial) {
-        document.querySelector(`.displayResultado`).innerHTML = "Player 1 Wins";
-    } else {
-        document.querySelector(`.displayResultado`).innerHTML = "Player 2 Wins";
     };
 };
 
@@ -391,18 +350,17 @@ const determineWinner = (timerId)=> {
 class CollisionBlock {
     constructor ({position}) {
     this.position = position;
-    this.width = 8;
-    this.height = 8;
+    this.width = 16; //Pasamos el tamaño en px de nuestros cuadrados de colisión.
+    this.height = 16;
     };
 
+    // Esto es para verificar visualmente si quedaron ubicados correctamente los bloques de colisión del background.
     draw() {
-        // Esto es para ver si quedaron ubicados correctamente los bloques de colisión del background.
-        // c.fillStyle = `rgba(255,0,0,0.5)`;
-        // c.fillRect(this.position.x, this.position.y,this.width,this.height);
+        c.fillStyle = `rgba(255,0,0,0.5)`;
+        c.fillRect(this.position.x, this.position.y,this.width,this.height);
     }
-
     update() {
         this.draw();
     }
-}
+};
 

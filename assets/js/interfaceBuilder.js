@@ -6,7 +6,7 @@ let canvas;
 let c;
 let timerId;
 
-// Inicializamos 4 variables que tendremos que tener en cuenta para crear el juego
+// Inicializamos 4 variables que tendremos que tener en cuenta para inicializar el juego
 let jugador1PersonajeElegido;
 let jugador2PersonajeElegido;
 let escenarioElegido;
@@ -144,15 +144,35 @@ let elegirPersonajes = ()=> {
     let escenario1 = document.createElement("option");
     escenario1.setAttribute("class","escenarioOpción");
     escenario1.setAttribute("value",1);
-    escenario1.innerHTML = `Bosque`;
+    escenario1.innerHTML = `Bosque 1`;
+    let escenario2 = document.createElement("option");
+    escenario2.setAttribute("class","escenarioOpción");
+    escenario2.setAttribute("value",2);
+    escenario2.innerHTML = `StringStar Fields`;
+    let escenario3 = document.createElement("option");
+    escenario3.setAttribute("class","escenarioOpción");
+    escenario3.setAttribute("value",3);
+    escenario3.innerHTML = `Hills`;
+    let escenario4 = document.createElement("option");
+    escenario4.setAttribute("class","escenarioOpción");
+    escenario4.setAttribute("value",4);
+    escenario4.innerHTML = `Magic Cliffs`;
+    let escenario5 = document.createElement("option");
+    escenario5.setAttribute("class","escenarioOpción");
+    escenario5.setAttribute("value",5);
+    escenario5.innerHTML = `Fantasy Caves`;
     escenarioSelect.appendChild(escenario1);
+    escenarioSelect.appendChild(escenario2);
+    escenarioSelect.appendChild(escenario3);
+    escenarioSelect.appendChild(escenario4);
+    escenarioSelect.appendChild(escenario5);
     escenarioContainer.appendChild(escenarioSelect);
-    // Creamos el botón de submit
+    // Creamos el botón de submit y le damos la función de limpiar el modal, colocarle la interfaz de juego e inicializar el juego
     let submit = document.createElement ("button");
     submit.setAttribute("class","submit");
     submit.innerHTML = `Comenzar Batalla`;
     submit.addEventListener("click",()=> {
-        escenarioElegido = escenarioSelect.options[escenarioSelect.selectedIndex].value;
+        escenarioElegido = parseInt(escenarioSelect.options[escenarioSelect.selectedIndex].value);
         if (jugador1PersonajeElegido == jugador2PersonajeElegido) {
             alert(`Por favor, elijan un personaje diferente cada uno.`);
         } else {
