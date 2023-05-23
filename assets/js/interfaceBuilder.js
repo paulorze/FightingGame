@@ -11,8 +11,6 @@ let jugador1PersonajeElegido;
 let jugador2PersonajeElegido;
 let escenarioElegido;
 let timer;
-// Declaramos el tiempo total de la partida
-let matchTime = 10;
 
 // Con la función elegirPersonajes, creamos la interfaz para que los jugadores elijan los personajes y el lugar de la batalla
 
@@ -34,37 +32,79 @@ let elegirPersonajes = ()=> {
     personajesJugador1.setAttribute("class","personajesContainer");
     let personaje1Jugador1 = document.createElement("div");
     personaje1Jugador1.setAttribute("class","personaje");
-    personaje1Jugador1.addEventListener("click",()=> {jugador1PersonajeElegido = 1});
+    personaje1Jugador1.setAttribute("data-value","1");
+    personaje1Jugador1.setAttribute("data-player","player1");
+    personaje1Jugador1.addEventListener("click",()=> {
+        if (!personaje1Jugador1.classList.contains("disabled")) {
+            jugador1PersonajeElegido = 1;
+            modifyButton(personaje1Jugador1,"player1");
+        };
+    });
     let imagenpersonaje1Jugador1 = document.createElement("img");
     imagenpersonaje1Jugador1.src = `./assets/graphics/CharacterIcons/EvilWizardIcon.png`;
     personaje1Jugador1.appendChild(imagenpersonaje1Jugador1);
     let personaje2Jugador1 = document.createElement("div");
     personaje2Jugador1.setAttribute("class","personaje");
-    personaje2Jugador1.addEventListener("click",()=> {jugador1PersonajeElegido = 2});
+    personaje2Jugador1.setAttribute("data-value","2");
+    personaje2Jugador1.setAttribute("data-player","player1");
+    personaje2Jugador1.addEventListener("click",()=> {
+        if (!personaje2Jugador1.classList.contains("disabled")) {
+            jugador1PersonajeElegido = 2;
+            modifyButton(personaje2Jugador1,"player1");
+        };
+    });
     let imagenpersonaje2Jugador1 = document.createElement("img");
     imagenpersonaje2Jugador1.src = `./assets/graphics/CharacterIcons/FantasyWarriorIcon.png`;
     personaje2Jugador1.appendChild(imagenpersonaje2Jugador1);
     let personaje3Jugador1 = document.createElement("div");
     personaje3Jugador1.setAttribute("class","personaje");
-    personaje3Jugador1.addEventListener("click",()=> {jugador1PersonajeElegido = 3});
+    personaje3Jugador1.setAttribute("data-value","3");
+    personaje3Jugador1.setAttribute("data-player","player1");
+    personaje3Jugador1.addEventListener("click",()=> {
+        if (!personaje3Jugador1.classList.contains("disabled")) {
+            jugador1PersonajeElegido = 3;
+            modifyButton(personaje3Jugador1,"player1");
+        };
+    });
     let imagenpersonaje3Jugador1 = document.createElement("img");
     imagenpersonaje3Jugador1.src = `./assets/graphics/CharacterIcons/HuntressIcon.png`;
     personaje3Jugador1.appendChild(imagenpersonaje3Jugador1);
     let personaje4Jugador1 = document.createElement("div");
     personaje4Jugador1.setAttribute("class","personaje");
-    personaje4Jugador1.addEventListener("click",()=> {jugador1PersonajeElegido = 4});
+    personaje4Jugador1.setAttribute("data-value","4");
+    personaje4Jugador1.setAttribute("data-player","player1");
+    personaje4Jugador1.addEventListener("click",()=> {
+        if (!personaje4Jugador1.classList.contains("disabled")) {
+            jugador1PersonajeElegido = 4;
+            modifyButton(personaje4Jugador1,"player1");
+        };
+    });
     let imagenpersonaje4Jugador1 = document.createElement("img");
     imagenpersonaje4Jugador1.src = `./assets/graphics/CharacterIcons/MedievalKingIcon.png`;
     personaje4Jugador1.appendChild(imagenpersonaje4Jugador1);
     let personaje5Jugador1 = document.createElement("div");
     personaje5Jugador1.setAttribute("class","personaje");
-    personaje5Jugador1.addEventListener("click",()=> {jugador1PersonajeElegido = 5});
+    personaje5Jugador1.setAttribute("data-value","5");
+    personaje5Jugador1.setAttribute("data-player","player1");
+    personaje5Jugador1.addEventListener("click",()=> {
+        if (!personaje5Jugador1.classList.contains("disabled")) {
+            jugador1PersonajeElegido = 5;
+            modifyButton(personaje5Jugador1,"player1");
+        };
+    });
     let imagenpersonaje5Jugador1 = document.createElement("img");
     imagenpersonaje5Jugador1.src = `./assets/graphics/CharacterIcons/MedievalKing2Icon.png`;
     personaje5Jugador1.appendChild(imagenpersonaje5Jugador1);
     let personaje6Jugador1 = document.createElement("div");
     personaje6Jugador1.setAttribute("class","personaje");
-    personaje6Jugador1.addEventListener("click",()=> {jugador1PersonajeElegido = 6});
+    personaje6Jugador1.setAttribute("data-value","6");
+    personaje6Jugador1.setAttribute("data-player","player1");
+    personaje6Jugador1.addEventListener("click",()=> {
+        if (!personaje6Jugador1.classList.contains("disabled")) {
+            jugador1PersonajeElegido = 6;
+            modifyButton(personaje6Jugador1,"player1");
+        };
+    });
     let imagenpersonaje6Jugador1 = document.createElement("img");
     imagenpersonaje6Jugador1.src = `./assets/graphics/CharacterIcons/MedievalWarriorIcon.png`;
     // Agregamos todo al contenedor correspondiente
@@ -87,37 +127,79 @@ let elegirPersonajes = ()=> {
     personajesJugador2.setAttribute("class","personajesContainer");
     let personaje1Jugador2 = document.createElement("div");
     personaje1Jugador2.setAttribute("class","personaje");
-    personaje1Jugador2.addEventListener("click",()=> {jugador2PersonajeElegido = 1});
+    personaje1Jugador2.setAttribute("data-value","1");
+    personaje1Jugador2.setAttribute("data-player","player2");
+    personaje1Jugador2.addEventListener("click",()=> {
+        if (!personaje1Jugador2.classList.contains("disabled")) {
+            jugador2PersonajeElegido = 1;
+            modifyButton(personaje1Jugador2,"player2");
+        };
+    });
     let imagenpersonaje1Jugador2 = document.createElement("img");
     imagenpersonaje1Jugador2.src = `./assets/graphics/CharacterIcons/EvilWizardIcon.png`;
     personaje1Jugador2.appendChild(imagenpersonaje1Jugador2);
     let personaje2Jugador2 = document.createElement("div");
     personaje2Jugador2.setAttribute("class","personaje");
-    personaje2Jugador2.addEventListener("click",()=> {jugador2PersonajeElegido = 2});
+    personaje2Jugador2.setAttribute("data-value","2");
+    personaje2Jugador2.setAttribute("data-player","player2");
+    personaje2Jugador2.addEventListener("click",()=> {
+        if (!personaje2Jugador2.classList.contains("disabled")) {
+            jugador2PersonajeElegido = 2;
+            modifyButton(personaje2Jugador2,"player2");
+        };
+    });
     let imagenpersonaje2Jugador2 = document.createElement("img");
     imagenpersonaje2Jugador2.src = `./assets/graphics/CharacterIcons/FantasyWarriorIcon.png`;
     personaje2Jugador2.appendChild(imagenpersonaje2Jugador2);
     let personaje3Jugador2 = document.createElement("div");
     personaje3Jugador2.setAttribute("class","personaje");
-    personaje3Jugador2.addEventListener("click",()=> {jugador2PersonajeElegido = 3});
+    personaje3Jugador2.setAttribute("data-value","3");
+    personaje3Jugador2.setAttribute("data-player","player2");
+    personaje3Jugador2.addEventListener("click",()=> {
+        if (!personaje3Jugador2.classList.contains("disabled")) {
+            jugador2PersonajeElegido = 3;
+            modifyButton(personaje3Jugador2,"player2");
+        };
+    });
     let imagenpersonaje3Jugador2 = document.createElement("img");
     imagenpersonaje3Jugador2.src = `./assets/graphics/CharacterIcons/HuntressIcon.png`;
     personaje3Jugador2.appendChild(imagenpersonaje3Jugador2);
     let personaje4Jugador2 = document.createElement("div");
     personaje4Jugador2.setAttribute("class","personaje");
-    personaje4Jugador2.addEventListener("click",()=> {jugador2PersonajeElegido = 4});
+    personaje4Jugador2.setAttribute("data-value","4");
+    personaje4Jugador2.setAttribute("data-player","player2");
+    personaje4Jugador2.addEventListener("click",()=> {
+        if (!personaje4Jugador2.classList.contains("disabled")) {
+            jugador2PersonajeElegido = 4;
+            modifyButton(personaje4Jugador2,"player2");
+        };
+    });
     let imagenpersonaje4Jugador2 = document.createElement("img");
-    imagenpersonaje4Jugador2.src = `./assets/graphics/CharacterIcons/MedievalKing2Icon.png`;
+    imagenpersonaje4Jugador2.src = `./assets/graphics/CharacterIcons/MedievalKingIcon.png`;
     personaje4Jugador2.appendChild(imagenpersonaje4Jugador2);
     let personaje5Jugador2 = document.createElement("div");
     personaje5Jugador2.setAttribute("class","personaje");
-    personaje5Jugador2.addEventListener("click",()=> {jugador2PersonajeElegido = 5});
+    personaje5Jugador2.setAttribute("data-value","5");
+    personaje5Jugador2.setAttribute("data-player","player2");
+    personaje5Jugador2.addEventListener("click",()=> {
+        if (!personaje5Jugador2.classList.contains("disabled")) {
+            jugador2PersonajeElegido = 5;
+            modifyButton(personaje5Jugador2,"player2");
+        };
+    });
     let imagenpersonaje5Jugador2 = document.createElement("img");
-    imagenpersonaje5Jugador2.src = `./assets/graphics/CharacterIcons/MedievalKingIcon.png`;
+    imagenpersonaje5Jugador2.src = `./assets/graphics/CharacterIcons/MedievalKing2Icon.png`;
     personaje5Jugador2.appendChild(imagenpersonaje5Jugador2);
     let personaje6Jugador2 = document.createElement("div");
     personaje6Jugador2.setAttribute("class","personaje");
-    personaje6Jugador2.addEventListener("click",()=> {jugador2PersonajeElegido = 6});
+    personaje6Jugador2.setAttribute("data-value","6");
+    personaje6Jugador2.setAttribute("data-player","player2");
+    personaje6Jugador2.addEventListener("click",()=> {
+        if (!personaje6Jugador2.classList.contains("disabled")) {
+            jugador2PersonajeElegido = 6;
+            modifyButton(personaje6Jugador2,"player2");
+        };
+    });
     let imagenpersonaje6Jugador2 = document.createElement("img");
     imagenpersonaje6Jugador2.src = `./assets/graphics/CharacterIcons/MedievalWarriorIcon.png`;
     personaje6Jugador2.appendChild(imagenpersonaje6Jugador2);
@@ -142,23 +224,23 @@ let elegirPersonajes = ()=> {
     let escenarioSelect = document.createElement("select");
     escenarioSelect.setAttribute("class","escenarioSelect");
     let escenario1 = document.createElement("option");
-    escenario1.setAttribute("class","escenarioOpción");
+    escenario1.setAttribute("class","escenarioOpcion");
     escenario1.setAttribute("value",1);
     escenario1.innerHTML = `Bosque 1`;
     let escenario2 = document.createElement("option");
-    escenario2.setAttribute("class","escenarioOpción");
+    escenario2.setAttribute("class","escenarioOpcion");
     escenario2.setAttribute("value",2);
     escenario2.innerHTML = `StringStar Fields`;
     let escenario3 = document.createElement("option");
-    escenario3.setAttribute("class","escenarioOpción");
+    escenario3.setAttribute("class","escenarioOpcion");
     escenario3.setAttribute("value",3);
     escenario3.innerHTML = `Hills`;
     let escenario4 = document.createElement("option");
-    escenario4.setAttribute("class","escenarioOpción");
+    escenario4.setAttribute("class","escenarioOpcion");
     escenario4.setAttribute("value",4);
     escenario4.innerHTML = `Magic Cliffs`;
     let escenario5 = document.createElement("option");
-    escenario5.setAttribute("class","escenarioOpción");
+    escenario5.setAttribute("class","escenarioOpcion");
     escenario5.setAttribute("value",5);
     escenario5.innerHTML = `Fantasy Caves`;
     escenarioSelect.appendChild(escenario1);
@@ -170,7 +252,9 @@ let elegirPersonajes = ()=> {
     // Creamos el botón de submit y le damos la función de limpiar el modal, colocarle la interfaz de juego e inicializar el juego
     let submit = document.createElement ("button");
     submit.setAttribute("class","submit");
-    submit.innerHTML = `Comenzar Batalla`;
+    let span = document.createElement("span");
+    span.innerHTML = "Comenzar Partida"
+    submit.appendChild(span);
     submit.addEventListener("click",()=> {
         escenarioElegido = parseInt(escenarioSelect.options[escenarioSelect.selectedIndex].value);
         if (jugador1PersonajeElegido == jugador2PersonajeElegido) {

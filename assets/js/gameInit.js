@@ -1,8 +1,10 @@
-// Creamos las constantes correspondientes a la posición inicial de los jugadores y las teclas que utilizarán.
+// Creamos las constantes correspondientes a la posición inicial de los jugadores, las teclas que utilizarán y el tiempo total de la partida.
 const positionPlayer1 = {x:200, y:20};
 const positionPlayer2 = {x:824, y:20};
 const keysPlayer1 = {left : 'a', right : 'd', jump : 'w', down : 's', melee : 'n'};
 const keysPlayer2 = {left : 'ArrowLeft', right : 'ArrowRight', jump : 'ArrowUp', down : 'ArrowDown', melee : '-'};
+let matchTime = 10;
+
 
 // Creamos las constantes que corresponderan a los bloques de colisión del piso, los bloques de colisión de las plataformas, al escenario y a los jugadores
 const floorCollisions = [];
@@ -550,8 +552,9 @@ const initializeGame = (jugador1,jugador2,escenario)=> {
     player2 = characterSelect(jugador2,`player2`,positionPlayer2,keysPlayer2);
     background = backgroundSelect(escenario);
 
-    timerDecrease(player1,player2);
+    timerDecrease();
     player1.movementInput();
     player2.movementInput();
+    window.addEventListener("mouseout",()=> player1.death());
     animate();
 };

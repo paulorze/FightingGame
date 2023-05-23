@@ -113,15 +113,16 @@ class Player extends Sprite {
         this.platformCollisionBlocks = platformCollisionBlocks;
     };
 
-    // Con la siguiente función definimos que el jugador esté atacando.
+    // Con la siguiente función hacemos que el jugador ataque si es que no ejecutándose la animación de ataque.
     attack() {
-        this.switchSprite(`attack`);
-        this.isAttacking = true;
+        if (this.image != this.sprites.attack.image) {
+            this.switchSprite(`attack`);
+            this.isAttacking = true;
+        };
     };
-    // Con la siguiente función definimos que el jugador ha muerto.
+    // Con la siguiente función verificamos que el sprite del jugador es el que corresponde a la muerte y si lo es, cambiamos su estado a muerto, lo cual imposibilitará mover el personaje o que se siga animando después del ultimo frame de muerte.
     death(){
-        this.switchSprite(`death`);
-        if (this.framesCurrent == this.framesMax -1) {
+        if (this.image === this.sprites.death.image && this.framesCurrent == (this.framesMax -1)) {
             this.dead = true;
         };
     };
@@ -132,6 +133,7 @@ class Player extends Sprite {
         if (this.image === this.sprites.attack.image && this.framesCurrent < this.sprites.attack.framesMax -1) return;
         if (this.image === this.sprites.takeHit.image && this.framesCurrent < this.sprites.takeHit.framesMax -1) return;
         if (this.image === this.sprites.death.image) return;
+        this.isAttacking = false; //En el código en el cual me basé, esto lo hace en verifyAttack(), pero lo coloqué acá para evitar un bug en el que algunos personajes tras saltar podían hacer daño al enemigo sin estar atacando
         switch (sprite) {
             case `idle`:
                 if (this.image != this.sprites.idle.image) {
@@ -265,16 +267,27 @@ class Player extends Sprite {
         };
         if (this.velocity.y < 0) {
             this.switchSprite(`jump`);
-        } else if (this.velocity.y > 0) {
+        } else if (this.velocity.y) {
             this.switchSprite(`fall`);
         };
     };
 
     // Con esta función le aplicamos gravedad al personaje.
     applyGravity() {
-        this.velocity.y += this.gravity;
+        this.velocity.y += this.gravity; //Si no escribimos estas dos líneas en este orden, el personaje se la va a pasar rebotando cuando tenga colisión vertical con un bloque
         this.position.y += this.velocity.y;
     };
+
+    // Con la siguiente función verificamos colisión contra los bordes del canvas
+    checkforCanvasCollisions() {
+        if (this.position.x <= 0) {
+            this.position.x = 0;
+        } else if (this.position.x + this.width >= canvas.width) {
+            this.position.x = canvas.width - this.width;
+        } else if (this.position.y <= 0) {
+            this.position.y = 0;
+        }
+    }
     
     // Con las siguientes funciones verificamos colisión con los bloques del suelo y de las plataformas
     checkFloorVerticalCollisions() {
@@ -335,6 +348,7 @@ class Player extends Sprite {
         this.movement();
         this.position.x += this.velocity.x;
         this.checkFloorHorizontalCollisions();
+        this.checkforCanvasCollisions();
         this.applyGravity();
         this.checkFloorVerticalCollisions();
         this.checkPlatformVerticalCollisions();
