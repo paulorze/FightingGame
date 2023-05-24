@@ -1,10 +1,42 @@
+// Con esta función creamos el contenedor que contendrá los personajes disponibles y le agregamos un botón por cada uno de manera dinámica.
+const createCharacterSelect = (player,selection)=> {
+    let i = 1;
+    let div = document.createElement("div");
+    div.setAttribute("class","personajesContainer");
+    characterIcons.forEach(icon => {
+        let button = createCharacterButton(i,player,selection,icon);
+        i ++;
+        div.appendChild(button);
+    });
+    return div;
+};
+
+// Con esta función creamos los botones correspondientes a los personajes disponibles.
+const createCharacterButton = (value,player,selection,source)=> {
+    let div = document.createElement("div");
+    div.setAttribute("class","personaje");
+    div.setAttribute("data-value",`${value}`);
+    div.setAttribute("data-player",player);
+    div.addEventListener("click",()=> {
+        if (!div.classList.contains("disabled")) {
+            if (selection === 1) {
+                jugador1PersonajeElegido = value;
+            } else if (selection === 2) {
+                jugador2PersonajeElegido = value;
+            };
+            modifyButton(div,player);
+        };
+    });
+    let img = document.createElement("img");
+    img.src = source;
+    div.appendChild(img);
+    return div
+};
+
 // Con esta función modificamos la clase del botón del personaje elegido y su equivalente del otro jugador, para que mostrar qué personaje ha sido seleccionado y para deshabilitar el otro.
 const modifyButton = (obj,player)=> {
     let value = obj.getAttribute('data-value');
     let buttons = document.querySelectorAll (".personaje");
-    console.log(obj.classList.contains("disabled"));
-    console.log(obj.getAttribute('data-player'))
-    console.log(player)
     buttons.forEach(button => {
         if (button.getAttribute('data-player') == player && !button.classList.contains("disabled")) {
             button.setAttribute("class","personaje");
@@ -19,7 +51,27 @@ const modifyButton = (obj,player)=> {
     obj.setAttribute("class","personaje active");
 };
 
+// Con esta función creamos el select para el escenario y le agregamos las opciones de manera dinámica.
+const createBackgroundSelect = ()=> {
+    let select = document.createElement("select");
+    select.setAttribute("class","escenarioSelect");
+    let i = 1;
+    backgroundList.forEach(background => {
+        let option = createBackgroundOption(i,background);
+        select.appendChild(option);
+        i ++;
+    });
+    return select;
+};
 
+// Con esta función creamos las opciones de escenario
+const createBackgroundOption = (value,name)=> {
+    let div = document.createElement("option");
+    div.setAttribute("class","escenarioOpcion");
+    div.setAttribute("value",value);
+    div.innerHTML = name;
+    return div
+};
 
 // Con esta función vamos disminuyendo los segundos y mostrándolo en pantalla. Al finalizar, se dispara la verificación del resultado.
 const timerDecrease = ()=> {
@@ -38,6 +90,7 @@ const determineWinner = (timerId)=> {
     clearTimeout(timerId);
     if ((player1.healthPartial / player1.healthTotal) == (player2.healthPartial / player2.healthTotal)) {
         document.querySelector(`.displayResultado`).innerHTML = "Draw";
+        resetFlag = true;
     }else if ((player1.healthPartial / player1.healthTotal) > (player2.healthPartial / player2.healthTotal)) {
         player2.switchSprite(`death`);
         document.querySelector(`.displayResultado`).innerHTML = "Player 1 Wins";
@@ -103,6 +156,33 @@ const platformCollision = ({object1, object2})=> {
         && object1.position.x + object1.width >= object2.position.x);
 };
 
+// Creamos una función que reinicie el juego automáticamente.
+const restartGame = ()=> {
+    let display = document.querySelector(`.displayResultado`);
+    restartTime ++;
+    if (restartTime >= 280){
+        display.innerHTML = `<p>1</p>`;
+        location.reload();
+    }else if (restartTime >= 220) {
+        display.innerHTML = `<p>1</p>`;
+    }else if (restartTime >= 160) {
+        display.innerHTML = `<p>2</p>`;
+    }else if (restartTime >= 100) {
+        display.innerHTML = `<p>3</p>`;
+    };
+};
+
+// Esto lo estaba pensando para resetear las variables sin tener que actualizar la página.
+// const resetVariables = ()=> {
+//     jugador1PersonajeElegido = null;
+//     jugador2PersonajeElegido = null;
+//     player1 = undefined;
+//     player2 = undefined;
+//     background = undefined;
+//     matchTime = 10;
+//     restartTime = 0;
+// }
+
 // Creamos la función que anima la interfaz de juego
 const animate = ()=> {
     window.requestAnimationFrame(animate);
@@ -110,6 +190,7 @@ const animate = ()=> {
     // c.fillStyle = `black`;
     // c.fillRect(0, 0, canvas.width,canvas.height);
     background.update();
+    // Esto es para apagar un poco los colores del fondo
     c.fillStyle = `rgba(255, 255, 255, 0.1)`
     c.fillRect(0, 0, canvas.width,canvas.height);
     player1.update();
@@ -126,6 +207,21 @@ const animate = ()=> {
     verifyAttack(player2,player1);
     sideChange(player1,player2);
     sideChange(player2,player1);
-    player1.death();
-    player2.death();
+    player1.death(jugador2Score,"jugador2Score");
+    player2.death(jugador1Score,"jugador1Score");
+    if (resetFlag) {
+        restartGame();
+    };
+};
+
+// Creamos la función que dispara cuando se apreta el botón submit y que comienza el juego con 2 jugadores
+const initializeGame = (jugador1,jugador2,escenario)=> {
+    player1 = characterSelect(jugador1,`player1`,positionPlayer1,keysPlayer1);
+    player2 = characterSelect(jugador2,`player2`,positionPlayer2,keysPlayer2);
+    background = backgroundSelect(escenario);
+
+    timerDecrease();
+    player1.movementInput();
+    player2.movementInput();
+    animate();
 };

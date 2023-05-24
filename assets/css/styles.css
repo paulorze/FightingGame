@@ -9,6 +9,7 @@ html {
 }
 
 .selectorContainer {
+  position: relative;
   background-image: url("../images/paperBackground.png");
   background-size: 100% 100%;
   padding: 2rem;
@@ -122,13 +123,22 @@ html {
   border: 0.08em solid grey;
   box-shadow: 0 0.4em 0.1em 0.019em grey;
 }
-.submit span:hover {
+.submit span:active {
   transition: all 0.25s;
   transform: translate(0, 0.4em);
   box-shadow: 0 0 0 0 grey;
 }
 .submit span:not(hover) {
   transition: all 0.25s;
+}
+
+.reset {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+}
+.reset span {
+  color: red;
 }
 
 .modal {

@@ -103,6 +103,7 @@ class Player extends Sprite {
         this.isAttacking;
         this.rightSide = false;
         this.dead = false;
+        this.score = false
         this.sprites = sprites;
 
         for (const sprite in sprites) {
@@ -121,9 +122,15 @@ class Player extends Sprite {
         };
     };
     // Con la siguiente función verificamos que el sprite del jugador es el que corresponde a la muerte y si lo es, cambiamos su estado a muerto, lo cual imposibilitará mover el personaje o que se siga animando después del ultimo frame de muerte.
-    death(){
+    death(counter,storage){
         if (this.image === this.sprites.death.image && this.framesCurrent == (this.framesMax -1)) {
             this.dead = true;
+            if (!this.score) {
+                counter ++;
+                localStorage.setItem(storage,counter);
+                this.score = true;
+                resetFlag = true;
+            };
         };
     };
 
@@ -188,7 +195,6 @@ class Player extends Sprite {
     };
 
     // Con esta función damos vuelta la imagen del personaje para que siempre esté viendo hacia el lado del oponente.
-
     drawMirrored(){
         // Declaramos las variables para que se pueda calcular de manera dinámica
         let spriteW = (this.image.width / this.framesMax);
