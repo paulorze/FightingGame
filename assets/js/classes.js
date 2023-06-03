@@ -50,7 +50,7 @@ class Sprite {
 };
 
 class Player extends Sprite {
-    constructor ({name,position,width,height,gravity,health,meleedmg,movementspd,jumpspd,keys:{left,right,jump,down,melee},offsetMirror = {x: 0, y: 0},offsetAtk,attackBox:{offsetAB,widthAB,heightAB},imageSrc,scale = 1, framesMax = 1,offset = { x: 0, y: 0 },sprites,collisionBlocks,platformCollisionBlocks,meleeAtkSound,deathSound}) {
+    constructor ({name,position,width,height,gravity,health,meleedmg,movementspd,jumpspd,keys:{left,right,jump,down,melee},offsetMirror = {x: 0, y: 0},offsetAtk,attackBox:{offsetAB,widthAB,heightAB},imageSrc,scale = 1, framesMax = 1,offset = { x: 0, y: 0 },sprites,collisionBlocks,platformCollisionBlocks,meleeAtkSound,deathSound,takeHitSound}) {
         super({
             position,
             imageSrc,
@@ -115,6 +115,7 @@ class Player extends Sprite {
         this.platformCollisionBlocks = platformCollisionBlocks;
         this.meleeAtkSound = new Audio (meleeAtkSound);
         this.deathSound = new Audio (deathSound);
+        this.takeHitSound = new Audio (takeHitSound);
     };
 
     // Con la siguiente función hacemos que el jugador ataque si es que no ejecutándose la animación de ataque.

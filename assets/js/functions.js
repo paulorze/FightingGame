@@ -115,9 +115,9 @@ const verifyAttack = (player1,player2)=> {
     if (attackCollision(player1,player2) && player1.isAttacking && player1.framesCurrent == player1.sprites.attack.frameAtk -1) {
         player2.healthPartial -= player1.meleedmg;
         if (player2.healthPartial > 0) {
-            playSound('./assets/music/hit.mp3')
             document.querySelector(`.${player2.name}Partial`).style.width = 100 - (100 - Math.round(player2.healthPartial * 100 / player2.healthTotal))+`%`;
         } else {document.querySelector(`.${player2.name}Partial`).style.width = "0%"}
+        playSound(player2.takeHitSound);
         player2.switchSprite(`takeHit`);
         player1.isAttacking = false;
     };
@@ -233,19 +233,17 @@ const animate = ()=> {
 
 // Creamos la función que dispara cuando se apreta el botón submit y que comienza el juego con 2 jugadores
 const initializeGame = (jugador1,jugador2,escenario)=> {
+    background = backgroundSelect(escenario);
     player1 = characterSelect(jugador1,`player1`,positionPlayer1,keysPlayer1);
     player2 = characterSelect(jugador2,`player2`,positionPlayer2,keysPlayer2);
-    background = backgroundSelect(escenario);
     if (sound) {
         player1.meleeAtkSound.load()
         player1.meleeAtkSound.load()
         player1.meleeAtkSound.onerror = ()=> console.log('Error al cargar audio')
         player2.meleeAtkSound.onerror = ()=> console.log('Error al cargar audio')
-    }
-    setTimeout(() => {
-        timerDecrease();
-        player1.movementInput();
-        player2.movementInput();
-        animate();
-    }, 2000);
+    };
+    timerDecrease();
+    player1.movementInput();
+    player2.movementInput();
+    animate();
 };
