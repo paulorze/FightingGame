@@ -63,7 +63,9 @@ const EvilWizard = (name,position,keys)=>{
             }
         },
         collisionBlocks: floorCollisionBlocks,
-        platformCollisionBlocks : platformCollisionBlocks
+        platformCollisionBlocks : platformCollisionBlocks,
+        meleeAtkSound: './assets/music/slash.mp3',
+        deathSound: './assets/music/death.mp3'
     });
 };
 
@@ -131,7 +133,9 @@ const FantasyWarrior = (name,position,keys)=> {
             }
         },
         collisionBlocks: floorCollisionBlocks,
-        platformCollisionBlocks : platformCollisionBlocks
+        platformCollisionBlocks : platformCollisionBlocks,
+        meleeAtkSound: './assets/music/slash.mp3',
+        deathSound: './assets/music/death.mp3'
     });
 };
 

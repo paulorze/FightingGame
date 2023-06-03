@@ -50,7 +50,7 @@ class Sprite {
 };
 
 class Player extends Sprite {
-    constructor ({name,position,width,height,gravity,health,meleedmg,movementspd,jumpspd,keys:{left,right,jump,down,melee},offsetMirror = {x: 0, y: 0},offsetAtk,attackBox:{offsetAB,widthAB,heightAB},imageSrc,scale = 1, framesMax = 1,offset = { x: 0, y: 0 },sprites,collisionBlocks,platformCollisionBlocks}) {
+    constructor ({name,position,width,height,gravity,health,meleedmg,movementspd,jumpspd,keys:{left,right,jump,down,melee},offsetMirror = {x: 0, y: 0},offsetAtk,attackBox:{offsetAB,widthAB,heightAB},imageSrc,scale = 1, framesMax = 1,offset = { x: 0, y: 0 },sprites,collisionBlocks,platformCollisionBlocks,meleeAtkSound,deathSound}) {
         super({
             position,
             imageSrc,
@@ -103,7 +103,7 @@ class Player extends Sprite {
         this.isAttacking;
         this.rightSide = false;
         this.dead = false;
-        this.deathSound = false;
+        this.deathSoundPlayed = false;
         this.score = false;
         this.sprites = sprites;
 
@@ -113,12 +113,14 @@ class Player extends Sprite {
         }
         this.collisionBlocks = collisionBlocks;
         this.platformCollisionBlocks = platformCollisionBlocks;
+        this.meleeAtkSound = new Audio (meleeAtkSound);
+        this.deathSound = new Audio (deathSound);
     };
 
     // Con la siguiente función hacemos que el jugador ataque si es que no ejecutándose la animación de ataque.
     attack() {
         if (this.image != this.sprites.attack.image) {
-            playSound('./assets/music/slash.mp3');
+            playSound(this.meleeAtkSound);
             this.switchSprite(`attack`);
             this.isAttacking = true;
         };
@@ -126,9 +128,9 @@ class Player extends Sprite {
     // Con la siguiente función verificamos que el sprite del jugador es el que corresponde a la muerte y si lo es, cambiamos su estado a muerto, lo cual imposibilitará mover el personaje o que se siga animando después del ultimo frame de muerte.
     death(counter,storage){
         if (this.image === this.sprites.death.image) {
-            if (!this.deathSound) {
-                playSound('./assets/music/death.mp3')
-                this.deathSound = true;
+            if (!this.deathSoundPlayed) {
+                playSound(this.deathSound)
+                this.deathSoundPlayed = true;
             };
         };
         if (this.image === this.sprites.death.image && this.framesCurrent == (this.framesMax -1)) {

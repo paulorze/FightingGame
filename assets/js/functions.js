@@ -195,10 +195,9 @@ const playMusic = ()=> {
     };
 };
 
-const playSound = (ruta)=> {
-    const sonido = new Audio (ruta)
-    sonido.volume = 0.15;
-    sound && sonido.play();
+const playSound = (audio)=> {
+    audio.volume = 0.15;
+    sound && audio.play();
 };
 
 // Creamos la función que anima la interfaz de juego
@@ -237,7 +236,12 @@ const initializeGame = (jugador1,jugador2,escenario)=> {
     player1 = characterSelect(jugador1,`player1`,positionPlayer1,keysPlayer1);
     player2 = characterSelect(jugador2,`player2`,positionPlayer2,keysPlayer2);
     background = backgroundSelect(escenario);
-
+    if (sound) {
+        player1.meleeAtkSound.load()
+        player1.meleeAtkSound.load()
+        player1.meleeAtkSound.onerror = ()=> console.log('Error al cargar audio')
+        player2.meleeAtkSound.onerror = ()=> console.log('Error al cargar audio')
+    }
     setTimeout(() => {
         timerDecrease();
         player1.movementInput();
