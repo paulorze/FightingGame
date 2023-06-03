@@ -68,6 +68,12 @@ let elegirPersonajes = ()=> {
         nombreJugador1.innerHTML = `Jugador 1: 0`;
         nombreJugador2.innerHTML = `Jugador 2: 0`;
     });
+    let muteButton = document.createElement('img');
+    muteButton.setAttribute('class', 'muteButton');
+    muteButton.setAttribute('src','./assets/images/muteButton.png');
+    muteButton.addEventListener('click', ()=> {
+        playMusic();
+    });
     // Agregamos todo al contenedor y lo retornamos
     container.appendChild(elijanPersonajes);
     container.appendChild(contenedorJugadores);
@@ -75,6 +81,7 @@ let elegirPersonajes = ()=> {
     container.appendChild(escenarioContainer);
     container.appendChild(submit);
     container.appendChild(reset);
+    container.appendChild(muteButton);
     return container;
 };
 

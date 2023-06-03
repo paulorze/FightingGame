@@ -14,13 +14,18 @@ let jugador2PersonajeElegido = null;
 let escenarioElegido;
 let timer;
 let resetFlag = false;
+let sound = false;
+const bgMusic = new Audio ('./assets/music/xDeviruchiDecisiveBattle.wav');
+bgMusic.volume = 0.10;
+
+
 
 // Creamos las constantes correspondientes a la posición inicial de los jugadores, las teclas que utilizarán, el tiempo total de la partida y el tiempo para el reseteo.
 const positionPlayer1 = {x:200, y:20};
 const positionPlayer2 = {x:824, y:20};
 const keysPlayer1 = {left : 'a', right : 'd', jump : 'w', down : 's', melee : 'n'};
 const keysPlayer2 = {left : 'ArrowLeft', right : 'ArrowRight', jump : 'ArrowUp', down : 'ArrowDown', melee : '-'};
-let matchTime = 10;
+let matchTime = 30;
 let restartTime = 0;
 
 // Creamos las constantes que corresponderan a los bloques de colisión del piso, los bloques de colisión de las plataformas, al escenario y a los jugadores.

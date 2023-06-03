@@ -10,7 +10,7 @@ html {
 
 .selectorContainer {
   position: relative;
-  background-image: url("../images/paperBackgroundd.webp");
+  background-image: url("../images/paperBackground.webp");
   background-size: 100% 100%;
   padding: 2rem;
   display: flex;
@@ -139,6 +139,15 @@ html {
 }
 .reset span {
   color: red;
+}
+
+.muteButton {
+  position: absolute;
+  left: 3rem;
+  bottom: 2rem;
+  width: 5rem;
+  height: 5rem;
+  cursor: pointer;
 }
 
 .modal {

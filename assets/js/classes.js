@@ -103,7 +103,8 @@ class Player extends Sprite {
         this.isAttacking;
         this.rightSide = false;
         this.dead = false;
-        this.score = false
+        this.deathSound = false;
+        this.score = false;
         this.sprites = sprites;
 
         for (const sprite in sprites) {
@@ -117,12 +118,19 @@ class Player extends Sprite {
     // Con la siguiente función hacemos que el jugador ataque si es que no ejecutándose la animación de ataque.
     attack() {
         if (this.image != this.sprites.attack.image) {
+            playSound('./assets/music/slash.mp3');
             this.switchSprite(`attack`);
             this.isAttacking = true;
         };
     };
     // Con la siguiente función verificamos que el sprite del jugador es el que corresponde a la muerte y si lo es, cambiamos su estado a muerto, lo cual imposibilitará mover el personaje o que se siga animando después del ultimo frame de muerte.
     death(counter,storage){
+        if (this.image === this.sprites.death.image) {
+            if (!this.deathSound) {
+                playSound('./assets/music/death.mp3')
+                this.deathSound = true;
+            };
+        };
         if (this.image === this.sprites.death.image && this.framesCurrent == (this.framesMax -1)) {
             this.dead = true;
             if (!this.score) {
