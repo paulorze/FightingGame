@@ -15,7 +15,7 @@ let escenarioElegido;
 let timer;
 let resetFlag = false;
 
-// Creamos las constantes correspondientes a la posición inicial de los jugadores, las teclas que utilizarán, el tiempo total de la partida y el tiempo de reseteo.
+// Creamos las constantes correspondientes a la posición inicial de los jugadores, las teclas que utilizarán, el tiempo total de la partida y el tiempo para el reseteo.
 const positionPlayer1 = {x:200, y:20};
 const positionPlayer2 = {x:824, y:20};
 const keysPlayer1 = {left : 'a', right : 'd', jump : 'w', down : 's', melee : 'n'};

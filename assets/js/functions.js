@@ -215,10 +215,10 @@ const animate = ()=> {
 };
 
 // Creamos la función que dispara cuando se apreta el botón submit y que comienza el juego con 2 jugadores
-const initializeGame = (jugador1,jugador2,escenario)=> {
+const initializeGame = async (jugador1,jugador2,escenario)=> {
     player1 = characterSelect(jugador1,`player1`,positionPlayer1,keysPlayer1);
     player2 = characterSelect(jugador2,`player2`,positionPlayer2,keysPlayer2);
-    background = backgroundSelect(escenario);
+    background = await backgroundSelect(escenario);
 
     timerDecrease();
     player1.movementInput();
