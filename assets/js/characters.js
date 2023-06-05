@@ -64,7 +64,7 @@ const EvilWizard = (name,position,keys)=>{
         },
         collisionBlocks: floorCollisionBlocks,
         platformCollisionBlocks : platformCollisionBlocks,
-        meleeAtkSound: './assets/music/slash.mp3',
+        meleeAtkSound: './assets/music/swoosh.mp3',
         deathSound: './assets/music/death.mp3',
         takeHitSound: './assets/music/hit.mp3'
     });
@@ -137,7 +137,7 @@ const FantasyWarrior = (name,position,keys)=> {
         platformCollisionBlocks : platformCollisionBlocks,
         meleeAtkSound: './assets/music/slash.mp3',
         deathSound: './assets/music/death.mp3',
-        takeHitSound: './assets/music/hit.mp3'
+        takeHitSound: './assets/music/hitM.mp3'
     });
 };
 
@@ -205,7 +205,10 @@ const Huntress = (name,position,keys)=> {
             }
         },
         collisionBlocks: floorCollisionBlocks,
-        platformCollisionBlocks : platformCollisionBlocks
+        platformCollisionBlocks : platformCollisionBlocks,
+        meleeAtkSound: './assets/music/swoosh.mp3',
+        deathSound: './assets/music/deathF.mp3',
+        takeHitSound: './assets/music/hitF.mp3'
     });
 };
 
@@ -273,7 +276,10 @@ const MedievalKing = (name,position,keys)=> {
             }
         },
         collisionBlocks: floorCollisionBlocks,
-        platformCollisionBlocks : platformCollisionBlocks
+        platformCollisionBlocks : platformCollisionBlocks,
+        meleeAtkSound: './assets/music/slash.mp3',
+        deathSound: './assets/music/death.mp3',
+        takeHitSound: './assets/music/hit.mp3'
     });
 };
 
@@ -341,7 +347,10 @@ const MedievalKing2 = (name,position,keys)=> {
             }
         },
         collisionBlocks: floorCollisionBlocks,
-        platformCollisionBlocks : platformCollisionBlocks
+        platformCollisionBlocks : platformCollisionBlocks,
+        meleeAtkSound: './assets/music/slash.mp3',
+        deathSound: './assets/music/death.mp3',
+        takeHitSound: './assets/music/hit.mp3'
     });
 };
 
@@ -409,7 +418,10 @@ const MedievalWarrior = (name,position,keys)=> {
             }
         },
         collisionBlocks: floorCollisionBlocks,
-        platformCollisionBlocks : platformCollisionBlocks
+        platformCollisionBlocks : platformCollisionBlocks,
+        meleeAtkSound: './assets/music/swoosh.mp3',
+        deathSound: './assets/music/death.mp3',
+        takeHitSound: './assets/music/hit.mp3'
     });
 };
 

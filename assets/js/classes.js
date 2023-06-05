@@ -4,7 +4,8 @@ class Sprite {
         imageSrc,
         scale = 1,
         framesMax = 1,
-        offset = { x: 0, y: 0 }
+        offset = { x: 0, y: 0 },
+        music
     }) {
         this.position = position;
         this.width = 50;
@@ -17,7 +18,15 @@ class Sprite {
         this.framesElapsed = 0;
         this.framesHold = 5;
         this.offset = offset;
+        this.music = new Audio (music)
     };
+
+    // Esta funcion ejecuta la musica de fondo
+    backgroundMusic() {
+        this.music.volume = 0.05
+        this.music.play();
+    }
+    
     // Esta función dibuja los sprites de manera dinámica dependiendo de la cantidad de frames que tenga la imagen original.
     draw() {
         c.drawImage(
@@ -121,7 +130,6 @@ class Player extends Sprite {
     // Con la siguiente función hacemos que el jugador ataque si es que no ejecutándose la animación de ataque.
     attack() {
         if (this.image != this.sprites.attack.image) {
-            playSound(this.meleeAtkSound);
             this.switchSprite(`attack`);
             this.isAttacking = true;
         };
@@ -360,6 +368,7 @@ class Player extends Sprite {
     update() {
         // Esta línea es para ver nuestro hitBox
         // c.fillRect(this.position.x,this.position.y,this.width,this.height);
+        if (this.image == this.sprites.attack.image && this.framesCurrent == 1) playSound(this.meleeAtkSound);
         (this.rightSide == false) ? this.draw() : this.drawMirrored();
         if (!this.dead) this.animateFrames()
         this.movement();

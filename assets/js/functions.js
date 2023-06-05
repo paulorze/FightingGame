@@ -115,9 +115,9 @@ const verifyAttack = (player1,player2)=> {
     if (attackCollision(player1,player2) && player1.isAttacking && player1.framesCurrent == player1.sprites.attack.frameAtk -1) {
         player2.healthPartial -= player1.meleedmg;
         if (player2.healthPartial > 0) {
+            playSound(player2.takeHitSound);
             document.querySelector(`.${player2.name}Partial`).style.width = 100 - (100 - Math.round(player2.healthPartial * 100 / player2.healthTotal))+`%`;
         } else {document.querySelector(`.${player2.name}Partial`).style.width = "0%"}
-        playSound(player2.takeHitSound);
         player2.switchSprite(`takeHit`);
         player1.isAttacking = false;
     };
@@ -196,8 +196,15 @@ const playMusic = ()=> {
 };
 
 const playSound = (audio)=> {
-    audio.volume = 0.15;
+    audio.volume = 0.2;
     sound && audio.play();
+};
+
+const stopSound = (audio)=> {
+    if (sound) {
+        audio.pause();
+        audio.currentTime = 0;
+    };
 };
 
 // Creamos la función que anima la interfaz de juego
@@ -237,13 +244,27 @@ const initializeGame = (jugador1,jugador2,escenario)=> {
     player1 = characterSelect(jugador1,`player1`,positionPlayer1,keysPlayer1);
     player2 = characterSelect(jugador2,`player2`,positionPlayer2,keysPlayer2);
     if (sound) {
-        player1.meleeAtkSound.load()
-        player1.meleeAtkSound.load()
-        player1.meleeAtkSound.onerror = ()=> console.log('Error al cargar audio')
-        player2.meleeAtkSound.onerror = ()=> console.log('Error al cargar audio')
+        playMusic();
+        background.music.load();
+        background.backgroundMusic();
+        player1.meleeAtkSound.load();
+        player1.deathSound.load();
+        player1.takeHitSound.load();
+        player2.meleeAtkSound.load();
+        player2.deathSound.load();
+        player2.takeHitSound.load();
+        background.music.onerror = ()=> console.log('Error al cargar audio');
+        player1.meleeAtkSound.onerror = ()=> console.log('Error al cargar audio');
+        player1.deathSound.onerror = ()=> console.log('Error al cargar audio');
+        player1.takeHitSound.onerror = ()=> console.log('Error al cargar audio');
+        player2.meleeAtkSound.onerror = ()=> console.log('Error al cargar audio');
+        player2.deathSound.onerror = ()=> console.log('Error al cargar audio');
+        player2.takeHitSound.onerror = ()=> console.log('Error al cargar audio');
     };
-    timerDecrease();
-    player1.movementInput();
-    player2.movementInput();
-    animate();
+    setTimeout(() => {
+        timerDecrease();
+        player1.movementInput();
+        player2.movementInput();
+        animate();
+    }, 1000);
 };

@@ -25,7 +25,8 @@ const Forest1 = ()=> {
         x: 0,
         y: 0
         },
-        imageSrc : './assets/graphics/Backgrounds/Forest1.png'
+        imageSrc : './assets/graphics/Backgrounds/Forest1.png',
+        music: './assets/music/BGMusic/Forest.mp3'
     });
 };
 
@@ -34,7 +35,8 @@ const StringStar = ()=> {
         x: 0,
         y: 0
         },
-        imageSrc : './assets/graphics/Backgrounds/SpringStarFields.png'
+        imageSrc : './assets/graphics/Backgrounds/SpringStarFields.png',
+        music: './assets/music/BGMusic/SpringStar.mp3'
     });
 };
 
@@ -43,7 +45,8 @@ const Hills = ()=> {
         x: 0,
         y: 0
         },
-        imageSrc : './assets/graphics/Backgrounds/Hills.png'
+        imageSrc : './assets/graphics/Backgrounds/Hills.png',
+        music: './assets/music/BGMusic/Hills.mp3'
     });
 }
 
@@ -52,7 +55,8 @@ const MagicCliffs = ()=> {
         x: 0,
         y: 0
         },
-        imageSrc : './assets/graphics/Backgrounds/MagicCliffs.png'
+        imageSrc : './assets/graphics/Backgrounds/MagicCliffs.png',
+        music: './assets/music/BGMusic/MagicCliffs.wav'
     });
 }
 
@@ -61,7 +65,8 @@ const FantasyCaves = ()=> {
         x: 0,
         y: 0
         },
-        imageSrc : './assets/graphics/Backgrounds/FantasyCaves.png'
+        imageSrc : './assets/graphics/Backgrounds/FantasyCaves.png',
+        music: './assets/music/BGMusic/Caves.mp3'
     });
 }
 

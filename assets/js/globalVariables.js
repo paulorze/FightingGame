@@ -15,8 +15,8 @@ let escenarioElegido;
 let timer;
 let resetFlag = false;
 let sound = false;
-const bgMusic = new Audio ('./assets/music/xDeviruchiDecisiveBattle.wav');
-bgMusic.volume = 0.10;
+const bgMusic = new Audio ('./assets/music/BGMusic/DecisiveBattle.wav');
+bgMusic.volume = 0.05;
 
 
 
