@@ -137,7 +137,7 @@ const FantasyWarrior = (name,position,keys)=> {
         platformCollisionBlocks : platformCollisionBlocks,
         meleeAtkSound: './assets/music/slash.mp3',
         deathSound: './assets/music/death.mp3',
-        takeHitSound: './assets/music/hitM.mp3'
+        takeHitSound: './assets/music/hit.mp3'
     });
 };
 
