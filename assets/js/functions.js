@@ -162,14 +162,14 @@ const platformCollision = ({object1, object2})=> {
 const restartGame = ()=> {
     let display = document.querySelector(`.displayResultado`);
     restartTime ++;
-    if (restartTime >= 280){
+    if (restartTime >= 250){
         display.innerHTML = `<p>1</p>`;
         location.reload();
-    }else if (restartTime >= 220) {
+    }else if (restartTime >= 200) {
         display.innerHTML = `<p>1</p>`;
-    }else if (restartTime >= 160) {
+    }else if (restartTime >= 140) {
         display.innerHTML = `<p>2</p>`;
-    }else if (restartTime >= 100) {
+    }else if (restartTime >= 80) {
         display.innerHTML = `<p>3</p>`;
     };
 };
