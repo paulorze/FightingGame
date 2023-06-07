@@ -62,7 +62,7 @@ let elegirPersonajes = ()=> {
             let timerInterval
             Swal.fire({
                 width: '70rem',
-                html: '<p style="font-family: \'Press Start 2P\', cursive; font-size: 2rem; color: #fff"><strong>¡La partida está por comenzar!</strong></p>',
+                html: '<p style="font-family: \'Press Start 2P\', cursive; font-size: 2rem; color: #fff"><strong>¡La partida está por comenzar en: <b></b>!</strong></p>',
                 background: '#3b3d40',
                 timer: 3000,
                 timerProgressBar: true,
