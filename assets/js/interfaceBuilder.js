@@ -64,13 +64,19 @@ let elegirPersonajes = ()=> {
                 width: '70rem',
                 html: '<p style="font-family: \'Press Start 2P\', cursive; font-size: 2rem; color: #fff"><strong>¡La partida está por comenzar!</strong></p>',
                 background: '#3b3d40',
-                timer: 1000,
+                timer: 3000,
                 timerProgressBar: true,
                 customClass: {
                     loader: 'custom-loader',
                 },
                 didOpen: () => {
                     Swal.showLoading()
+                    const b = Swal.getHtmlContainer().querySelector('b')
+                    let contenido = 3;
+                    timerInterval = setInterval(() => {
+                    b.textContent = contenido;
+                    contenido --;
+                    }, 1000);
                 },
                 willClose: () => {
                     clearInterval(timerInterval)

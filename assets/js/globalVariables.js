@@ -14,10 +14,11 @@ let jugador2PersonajeElegido = null;
 let escenarioElegido;
 let timer;
 let resetFlag = false;
+let resetCount = 0;
 let sound = false;
 const bgMusic = new Audio ('./assets/music/BGMusic/DecisiveBattle.mp3');
 bgMusic.volume = 0.05;
-const lockSound = new Audio ('./assets/music/lock.mp3')
+const lockSound = new Audio ('./assets/music/lock.mp3');
 
 
 
