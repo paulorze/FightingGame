@@ -167,9 +167,7 @@ const restartGame = ()=> {
             display.innerHTML = `<p>1</p>`;
             location.reload();
             resetCount ++
-        } else {
-            return
-        };
+        }
     }else if (restartTime >= 200) {
         display.innerHTML = `<p>1</p>`;
     }else if (restartTime >= 140) {
