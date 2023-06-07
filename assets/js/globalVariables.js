@@ -15,8 +15,9 @@ let escenarioElegido;
 let timer;
 let resetFlag = false;
 let sound = false;
-const bgMusic = new Audio ('./assets/music/BGMusic/DecisiveBattle.wav');
+const bgMusic = new Audio ('./assets/music/BGMusic/DecisiveBattle.mp3');
 bgMusic.volume = 0.05;
+const lockSound = new Audio ('./assets/music/lock.mp3')
 
 
 

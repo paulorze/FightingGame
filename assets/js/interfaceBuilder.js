@@ -46,13 +46,40 @@ let elegirPersonajes = ()=> {
     submit.addEventListener("click",()=> {
         escenarioElegido = parseInt(escenarioSelect.options[escenarioSelect.selectedIndex].value);
         if (jugador1PersonajeElegido == jugador2PersonajeElegido || jugador1PersonajeElegido == undefined || jugador2PersonajeElegido == undefined) {
-            alert(`Por favor, elijan un personaje diferente cada uno.`);
+            Swal.fire({
+                position: 'top',
+                icon: "warning",
+                width: '50rem',
+                html: '<p style="font-family: \'Press Start 2P\', cursive; font-size: 2rem; color: #fff"><b>Por favor, elijan un personaje diferente cada uno.</b></p>',
+                background: '#3b3d40'
+            });
         } else {
             modal.innerHTML = ``;
             modal.appendChild(interfazJuego());
             canvas = document.querySelector(`.canvas`);
             c = canvas.getContext(`2d`);
             timer = document.querySelector(`.timer`);
+            let timerInterval
+            Swal.fire({
+                width: '70rem',
+                html: '<p style="font-family: \'Press Start 2P\', cursive; font-size: 2rem; color: #fff"><strong>¡La partida está por comenzar!</strong></p>',
+                background: '#3b3d40',
+                timer: 1000,
+                timerProgressBar: true,
+                customClass: {
+                    loader: 'custom-loader',
+                },
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+                }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        console.log('I was closed by the timer')
+                }
+            })
             initializeGame(jugador1PersonajeElegido,jugador2PersonajeElegido,escenarioElegido);
         };
     });
@@ -74,6 +101,20 @@ let elegirPersonajes = ()=> {
     muteButton.addEventListener('click', ()=> {
         playMusic();
     });
+    let info = document.createElement("button");
+    info.setAttribute("class","submit info");
+    let span3 = document.createElement("span");
+    span3.innerHTML = "Controles"
+    info.appendChild(span3);
+    info.addEventListener('click',()=> {
+        Swal.fire({
+            position: 'top',
+            icon: "info",
+            width: '70rem',
+            html: '<p style="font-family: \'Press Start 2P\', cursive; font-size: 2rem; color: #fff;"><b>Jugador 1</b></p><br><p style="font-family: \'Press Start 2P\', cursive; font-size: 1.5rem; color: #fff;">Teclas de Movimiento: <b>\'w\', \'a\', \'s\', \'d\'</b></p><br><p style="font-family: \'Press Start 2P\', cursive; font-size: 1.5rem; color: #fff;">Teclas para atacar: <b>\'n\'</b></p><br><br><p style="font-family: \'Press Start 2P\', cursive; font-size: 2rem; color: #fff;"><b>Jugador 2</b></p><br><p style="font-family: \'Press Start 2P\', cursive; font-size: 1.5rem; color: #fff;">Teclas de Movimiento: <b>\'↑\', \'←\', \'↓\', \'→\'</b></p><br><p style="font-family: \'Press Start 2P\', cursive; font-size: 1.5rem; color: #fff;">Teclas para atacar: <b>\'-\'</b></p>',
+            background: '#3b3d40'
+        });
+    })
     // Agregamos todo al contenedor y lo retornamos
     container.appendChild(elijanPersonajes);
     container.appendChild(contenedorJugadores);
@@ -82,6 +123,7 @@ let elegirPersonajes = ()=> {
     container.appendChild(submit);
     container.appendChild(reset);
     container.appendChild(muteButton);
+    container.appendChild(info);
     return container;
 };
 

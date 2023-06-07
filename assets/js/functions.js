@@ -48,7 +48,8 @@ const modifyButton = (obj,player)=> {
             button.setAttribute("class","personaje disabled");
         };
     });
-    obj.setAttribute("class","personaje active");
+    obj.setAttribute("class","personaje active animate__animated animate__headShake");
+    playSound(lockSound);
 };
 
 // Con esta función creamos el select para el escenario y le agregamos las opciones de manera dinámica.
@@ -196,7 +197,7 @@ const playMusic = ()=> {
 };
 
 const playSound = (audio)=> {
-    audio.volume = 0.2;
+    audio.volume = 0.5;
     sound && audio.play();
 };
 
@@ -245,6 +246,7 @@ const initializeGame = (jugador1,jugador2,escenario)=> {
     player2 = characterSelect(jugador2,`player2`,positionPlayer2,keysPlayer2);
     if (sound) {
         playMusic();
+        sound = true;
         background.music.load();
         background.backgroundMusic();
         player1.meleeAtkSound.load();

@@ -23,9 +23,9 @@ class Sprite {
 
     // Esta funcion ejecuta la musica de fondo
     backgroundMusic() {
-        this.music.volume = 0.05
+        this.music.volume = 0.1
         this.music.play();
-    }
+    };
     
     // Esta función dibuja los sprites de manera dinámica dependiendo de la cantidad de frames que tenga la imagen original.
     draw() {

@@ -35,8 +35,8 @@ const StringStar = ()=> {
         x: 0,
         y: 0
         },
-        imageSrc : './assets/graphics/Backgrounds/SpringStarFields.png',
-        music: './assets/music/BGMusic/SpringStar.mp3'
+        imageSrc : './assets/graphics/Backgrounds/StringStarFields.png',
+        music: './assets/music/BGMusic/StringStar.mp3'
     });
 };
 
@@ -56,7 +56,7 @@ const MagicCliffs = ()=> {
         y: 0
         },
         imageSrc : './assets/graphics/Backgrounds/MagicCliffs.png',
-        music: './assets/music/BGMusic/MagicCliffs.wav'
+        music: './assets/music/BGMusic/MagicCliffs.mp3'
     });
 }
 

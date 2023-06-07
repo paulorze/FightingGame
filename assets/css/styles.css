@@ -119,7 +119,7 @@ html {
   background-color: #3b3d40;
   border-radius: 0.2em;
   font-size: 1.5em;
-  color: #fff;
+  color: #a5dc86;
   border: 0.08em solid grey;
   box-shadow: 0 0.4em 0.1em 0.019em grey;
 }
@@ -135,10 +135,10 @@ html {
 .reset {
   position: absolute;
   right: 1rem;
-  bottom: 1rem;
+  bottom: 2rem;
 }
 .reset span {
-  color: red;
+  color: #f27474;
 }
 
 .muteButton {
@@ -148,6 +148,28 @@ html {
   width: 5rem;
   height: 5rem;
   cursor: pointer;
+}
+
+.info {
+  position: absolute;
+  left: 13rem;
+  bottom: 2rem;
+}
+.info span {
+  color: whitesmoke;
+}
+
+.swal2-popup .swal2-styled:not([disabled]):not(.swal2-loading) {
+  font-size: 1.2rem;
+  font-family: "Press Start 2P", cursive;
+  background-color: #a5dc86;
+}
+
+.custom-loader {
+  height: 7.5rem;
+  width: 7.5rem;
+  border-width: 1rem;
+  margin: 0;
 }
 
 .modal {
