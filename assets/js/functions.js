@@ -163,8 +163,13 @@ const restartGame = ()=> {
     let display = document.querySelector(`.displayResultado`);
     restartTime ++;
     if (restartTime >= 250){
-        display.innerHTML = `<p>1</p>`;
-        location.reload();
+        if (resetCount == 0) {
+            display.innerHTML = `<p>1</p>`;
+            location.reload();
+            resetCount ++
+        } else {
+            return
+        };
     }else if (restartTime >= 200) {
         display.innerHTML = `<p>1</p>`;
     }else if (restartTime >= 140) {
